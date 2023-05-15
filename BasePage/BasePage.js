@@ -95,6 +95,25 @@ class BasePage {
     await this.page.type(selector, text);
   }
 
+  async uploadFile(selector, pathToFile) {
+    await (await this.page.$(selector)).uploadFile(pathToFile);
+  }
+
+  async dialogAccept() {
+    this.page.on('dialog', async dialog => {
+      await dialog.accept();
+    })
+  }
+
+  async submitForm(selector) {
+    await Promise.all([
+      page.$eval('input[type=submit]', element =>
+        element.click()
+      ),
+      await page.waitForNetworkIdle(), // check moving line to dialogAccept
+    ]);
+  }
+
   async BasePageFromBtn() {
     await this.clickBtn(this.conf.selector.homeBtn);
   }

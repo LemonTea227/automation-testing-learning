@@ -1,0 +1,92 @@
+{
+    "login": {
+        "usernameSignup": [
+            "testTavor",
+            "[data-qa='signup-name']"
+        ],
+        "emailSignup": [
+            "testTavor@gmail.com",
+            "[data-qa='signup-email']"
+        ],
+        "emailLogin": [
+            "testTavor@gmail.com",
+            "[data-qa='login-email']"
+        ],
+        "passwordLogin": [
+            "testTavor123$",
+            "[data-qa='login-password']"
+        ]
+    },
+    "signup": {
+        "username": [
+            "testTavor",
+            "[data-qa='name']"
+        ],
+        "email": [
+            "testTavor@gmail.com",
+            "[data-qa='email']"
+        ],
+        "title": [
+            "Mr.",
+            "[id='id_gender1']"
+        ],
+        "password": [
+            "testTavor123$",
+            "[data-qa='password']"
+        ],
+        "dateOfBirth": {
+            "day": [
+                "22",
+                "[data-qa='days']"
+            ],
+            "month": [
+                "7",
+                "[data-qa='months']"
+            ],
+            "year": [
+                "2000",
+                "[data-qa='years']"
+            ]
+        },
+        "firstName": [
+            "Tavor",
+            "[data-qa='first_name']"
+        ],
+        "lastName": [
+            "Naydits",
+            "[data-qa='last_name']"
+        ],
+        "company": [
+            "Testing.inc",
+            "[data-qa='company']"
+        ],
+        "address": [
+            "here st.",
+            "[data-qa='address']"
+        ],
+        "address2": [
+            "there st.",
+            "[data-qa='address2']"
+        ],
+        "country": [
+            "Israel",
+            "[data-qa='country']"
+        ],
+        "state": [
+            "irl",
+            "[data-qa='state']"
+        ],
+        "city": [
+            "wow",
+            "[data-qa='city']"
+        ],
+        "zipcode": [
+            "6969696",
+            "[data-qa='zipcode']"
+        ],
+        "mobileNumber": [
+            "0543116969",
+            "[data-qa='mobile_number']"
+        ]
+    }
+}

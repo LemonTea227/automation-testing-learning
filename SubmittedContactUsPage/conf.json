@@ -1,0 +1,9 @@
+{
+    "selector": {
+        "successHeader": ".status.alert.alert-success",
+        "homeFormBtn": ".btn.btn-success"
+    },
+    "args": {
+        "successHeader": "Success! Your details have been submitted successfully."
+    }
+}

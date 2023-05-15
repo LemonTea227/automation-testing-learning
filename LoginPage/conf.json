@@ -1,0 +1,19 @@
+{
+    "selector" : {
+        "usernameSignup": "[data-qa='signup-name']",
+        "emailSignup":"[data-qa='signup-email']",
+        "signupBtn": "[data-qa='signup-button']",
+        "signupHeader": ".signup-form h2",
+        "emailLogin": "[data-qa='login-email']",
+        "passwordLogin": "[data-qa='login-password']",
+        "loginBtn": "[data-qa='login-button']",
+        "loginHeader": ".signup-form h2"
+    },
+    "args" : {
+        "username": "testTavor",
+        "email":"testTavor@gmail.com",
+        "password":"testTavor123$",
+        "signupHeader": "New User Signup!",
+        "loginHeader": "Login to your account"
+    }
+}

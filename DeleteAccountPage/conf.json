@@ -1,0 +1,9 @@
+{
+    "selector" : {
+        "AccountDeletedHeader": "[data-qa='account-deleted']",
+        "continueBtn": "[data-qa='continue-button']"
+    },
+    "args" : {
+        "AccountDeletedHeader":"Account Deleted!"
+    }
+}

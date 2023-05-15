@@ -1,0 +1,17 @@
+{
+  "name": "tavor",
+  "version": "1.0.0",
+  "main": "fileName.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^4.6.0"
+  },
+  "dependencies": {
+    "puppeteer": "^19.11.1"
+  },
+  "description": ""
+}

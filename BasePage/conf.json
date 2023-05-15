@@ -1,0 +1,19 @@
+{
+    "selector" : {
+        "homeLogo" : ".logo",
+        "homeBtn" : "a[href$='/']",
+        "products" : "a[href$='/products']",
+        "cart" : "a[href$='/view_cart']",
+        "signupLogin" : "a[href$='/login']",
+        "testCases" : "a[href$='/test_cases']",
+        "APITesting" : "a[href$='/api_list']",
+        "videoTutorials" : "a[href$='https://www.youtube.com/c/AutomationExercise']",
+        "contactUs": "a[href$='/contact_us']",
+        "logout": "a[href$='/logout']",
+        "deleteAccount": "a[href$='/delete_account']",
+        "loggedAs": ".nav.navbar-nav :last-child"
+    },
+    "args" : {
+
+    }
+}

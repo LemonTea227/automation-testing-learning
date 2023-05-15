@@ -1,0 +1,49 @@
+{
+    "selector": {
+        "signupHeader":"h2 b",
+        "username": "[data-qa='name']",
+        "email": "[data-qa='email']",
+        "title": "[id='id_gender1']",
+        "password": "[data-qa='password']",
+        "dateOfBirth": {
+            "day": "[data-qa='days']",
+            "month": "[data-qa='months']",
+            "year": "[data-qa='years']"
+        },
+        "firstName": "[data-qa='first_name']",
+        "lastName": "[data-qa='last_name']",
+        "company": "[data-qa='company']",
+        "address": "[data-qa='address']",
+        "address2": "[data-qa='address2']",
+        "country": "[data-qa='country']",
+        "state": "[data-qa='state']",
+        "city": "[data-qa='city']",
+        "zipcode": "[data-qa='zipcode']",
+        "mobileNumber": "[data-qa='mobile_number']",
+        "newsletter": "#newsletter",
+        "offers":"#optin",
+        "createAccountBtn": "[data-qa='create-account']"
+    },
+    "args": {
+        "signupHeader":"Enter Account Information",
+        "username": "testTavor",
+        "email": "testTavor@gmail.com",
+        "title": "Mr.",
+        "password": "testTavor123$",
+        "dateOfBirth": {
+            "day": "22",
+            "month": "7",
+            "year": "2000"
+        },
+        "firstName": "Tavor",
+        "lastName": "Naydits",
+        "company": "Testing.inc",
+        "address": "here st.",
+        "address2": "there st.",
+        "country": "Israel",
+        "state": "irl",
+        "city": "wow",
+        "zipcode": "6969696",
+        "mobileNumber": "0543116969"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "selector": {
+        "contactUsHeader": ".contact-form h2",
+        "fullName": "[data-qa='name']",
+        "email": "[data-qa='email']",
+        "subject": "[data-qa='subject']",
+        "message": "[data-qa='message']",
+        "fileInput": "input[type=file]",
+        "submitBtn": "input[type=submit]"
+    },
+    "args": {
+        "contactUsHeader": "Get In Touch",
+        "fullName": "Tavor Naydits",
+        "email": "testTavor@gmail.com",
+        "subject": "QA",
+        "message": "I love testing my automations in this site!",
+        "filePath": "C:/Users/tavor's_tini_lapci/Pictures/Saved Pictures/a closer look.gif"
+    }
+}

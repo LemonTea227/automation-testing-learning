@@ -79,6 +79,18 @@ class BasePage {
       });
   }
 
+  async getCheckedStatus(selector) {
+    await (await (await page.$(selector)).getProperty('checked')).jsonValue()
+  }
+
+  async selectOption(selector, valueToSelect){
+    await page.select(selector,valueToSelect);
+  }
+
+  async getSelected(selector) {
+    return await await page.evaluate(x => x.value, (await page.$(selector)));
+  }
+
   async getTrimmedText(selector) {
     return await this.getSelectorValue(selector).trim();
   }

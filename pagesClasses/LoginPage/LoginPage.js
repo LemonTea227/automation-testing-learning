@@ -1,63 +1,64 @@
 const BasePage = require("../BasePage/BasePage");
+const {selectors, args} = require('./conf.json');
 
 class LoginPage extends BasePage {
-    constructor() {
-        this.conf = JSON.parse(fs.readFileSync('LoginPage/conf.json'));
+    constructor(page) {
+        this.page = page;
     }
 
     async clickSignup() {
-        await this.clickBtn(this.conf.selector.signupBtn);
+        await this.clickBtn(selectors.signupBtn);
     }
     async clickLogin() {
-        await this.clickBtn(this.conf.selector.loginBtn);
+        await this.clickBtn(selectors.loginBtn);
     }
 
 
     async getSignup() {
         return {
-            "username": await this.getTypedValue(this.conf.selector.usernameSignup),
-            "email": await this.getTypedValue(this.conf.selector.emailSignup)
+            "username": await this.getTypedValue(selectors.usernameSignup),
+            "email": await this.getTypedValue(selectors.emailSignup)
         };
     }
     async getLogin() {
         return {
-            "email": await this.getTypedValue(this.conf.selector.emailLogin),
-            "password": await this.getTypedValue(this.conf.selector.passwordLogin)
+            "email": await this.getTypedValue(selectors.emailLogin),
+            "password": await this.getTypedValue(selectors.passwordLogin)
         };
     }
     async getSignupHeader() {
-        return await this.getTrimmedText(this.conf.selector.signupHeader);
+        return await this.getTrimmedText(selectors.signupHeader);
     }
     async getLoginHeader() {
-        return await this.getTrimmedText(this.conf.selector.loginHeader);
+        return await this.getTrimmedText(selectors.loginHeader);
     }
 
 
     getExpectedSignup() {
         return {
-            "username": this.conf.args.username,
-            "email": this.conf.args.email
+            "username": args.username,
+            "email": args.email
         };
     }
     getExpectedLogin() {
         return {
-            "email": this.conf.args.email,
-            "password": this.conf.args.password
+            "email": args.email,
+            "password": args.password
         };
     }
     getExpectedSignupHeader() {
-        return this.conf.args.signupHeader;
+        return args.signupHeader;
     }
     getExpectedLoginHeader() {
-        return this.conf.args.loginHeader;
+        return args.loginHeader;
     }
 
     async typeSignup() {
-        await this.typeToSelector(this.conf.selector.username, this.conf.args.usernameSignup);
-        await this.typeToSelector(this.conf.selector.email, this.conf.args.emailSignup);
+        await this.typeToSelector(selectors.username, args.usernameSignup);
+        await this.typeToSelector(selectors.email, args.emailSignup);
     }
     async typeLogin() {
-        await this.typeToSelector(this.conf.selector.username, this.conf.args.usernameSignup);
-        await this.typeToSelector(this.conf.selector.email, this.conf.args.emailSignup);
+        await this.typeToSelector(selectors.username, args.usernameSignup);
+        await this.typeToSelector(selectors.email, args.emailSignup);
     }
 }

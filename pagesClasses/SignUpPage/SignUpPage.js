@@ -1,100 +1,101 @@
 const BasePage = require("../BasePage/BasePage");
+const {selectors, args} = require('./conf.json');
 
 class SignUpPage extends BasePage {
-    constructor() {
-        this.conf = JSON.parse(fs.readFileSync('SignUpPage/conf.json'));
+    constructor(page) {
+        this.page = page;
     }
 
     async clickCreateAccount() {
-        await this.clickBtn(this.conf.selector.createAccountBtn);
+        await this.clickBtn(selectors.createAccountBtn);
     }
     async checkNewsletter() {
-        await this.clickBtn(this.conf.selector.newsletter);
+        await this.clickBtn(selectors.newsletter);
     }
     async checkOffers() {
-        await this.clickBtn(this.conf.selector.offers);
+        await this.clickBtn(selectors.offers);
     }
 
     async fillAccountInformation() {
         //excludes name and email - they come from the last page
-        await this.clickBtn(this.conf.selector.title);
-        await this.typeToSelector(this.conf.selector.password, this.conf.args.password);
-        await this.selectOption(this.conf.selector.dateOfBirth.day, this.conf.args.dateOfBirth.day);
-        await this.selectOption(this.conf.selector.dateOfBirth.month, this.conf.args.dateOfBirth.month);
-        await this.selectOption(this.conf.selector.dateOfBirth.year, this.conf.args.dateOfBirth.year);
+        await this.clickBtn(selectors.title);
+        await this.typeToSelector(selectors.password, args.password);
+        await this.selectOption(selectors.dateOfBirth.day, args.dateOfBirth.day);
+        await this.selectOption(selectors.dateOfBirth.month, args.dateOfBirth.month);
+        await this.selectOption(selectors.dateOfBirth.year, args.dateOfBirth.year);
     }
     async fillAddressInformation() {
-        await this.typeToSelector(this.conf.selector.firstName, this.conf.args.firstName);
-        await this.typeToSelector(this.conf.selector.lastName, this.conf.args.lastName);
-        await this.typeToSelector(this.conf.selector.company, this.conf.args.company);
-        await this.typeToSelector(this.conf.selector.address, this.conf.args.address);
-        await this.typeToSelector(this.conf.selector.address2, this.conf.args.address2);
-        await this.typeToSelector(this.conf.selector.country, this.conf.args.country);
-        await this.typeToSelector(this.conf.selector.state, this.conf.args.state);
-        await this.typeToSelector(this.conf.selector.city, this.conf.args.city);
-        await this.typeToSelector(this.conf.selector.zipcode, this.conf.args.zipcode);
-        await this.typeToSelector(this.conf.selector.mobileNumber, this.conf.args.mobileNumber);
+        await this.typeToSelector(selectors.firstName, args.firstName);
+        await this.typeToSelector(selectors.lastName, args.lastName);
+        await this.typeToSelector(selectors.company, args.company);
+        await this.typeToSelector(selectors.address, args.address);
+        await this.typeToSelector(selectors.address2, args.address2);
+        await this.typeToSelector(selectors.country, args.country);
+        await this.typeToSelector(selectors.state, args.state);
+        await this.typeToSelector(selectors.city, args.city);
+        await this.typeToSelector(selectors.zipcode, args.zipcode);
+        await this.typeToSelector(selectors.mobileNumber, args.mobileNumber);
     }
 
     async getSignupHeader() {
-        return await this.getTrimmedText(this.conf.selector.signupHeader);
+        return await this.getTrimmedText(selectors.signupHeader);
     }
     async getAccountInformation() {
         return {
-            "title": await this.getCheckedStatus(this.conf.selector.title),
-            "username": await this.getTrimmedText(this.conf.selector.username),
-            "email": await this.getTrimmedText(this.conf.selector.email1),
-            "password": await this.getTrimmedText(this.conf.selector.password),
+            "title": await this.getCheckedStatus(selectors.title),
+            "username": await this.getTrimmedText(selectors.username),
+            "email": await this.getTrimmedText(selectors.email1),
+            "password": await this.getTrimmedText(selectors.password),
             "dateOfBirth": {
-                "day": await this.getSelected(this.conf.selector.dateOfBirth.day),
-                "month": await this.getSelected(this.conf.selector.dateOfBirth.month),
-                "year": await this.getSelected(this.conf.selector.dateOfBirth.year)
+                "day": await this.getSelected(selectors.dateOfBirth.day),
+                "month": await this.getSelected(selectors.dateOfBirth.month),
+                "year": await this.getSelected(selectors.dateOfBirth.year)
             }
         }
     }
     async getAddressInformation() {
         return {
-            "firstName": await this.getTrimmedText(this.conf.selector.firstName),
-            "lastName": await this.getTrimmedText(this.conf.selector.lastName),
-            "company": await this.getTrimmedText(this.conf.selector.company),
-            "address": await this.getTrimmedText(this.conf.selector.address),
-            "address2": await this.getTrimmedText(this.conf.selector.address2),
-            "country": await this.getTrimmedText(this.conf.selector.country),
-            "state": await this.getTrimmedText(this.conf.selector.state),
-            "city": await this.getTrimmedText(this.conf.selector.city),
-            "zipcode": await this.getTrimmedText(this.conf.selector.zipcode),
-            "mobileNumber": await this.getTrimmedText(this.conf.selector.mobileNumber)
+            "firstName": await this.getTrimmedText(selectors.firstName),
+            "lastName": await this.getTrimmedText(selectors.lastName),
+            "company": await this.getTrimmedText(selectors.company),
+            "address": await this.getTrimmedText(selectors.address),
+            "address2": await this.getTrimmedText(selectors.address2),
+            "country": await this.getTrimmedText(selectors.country),
+            "state": await this.getTrimmedText(selectors.state),
+            "city": await this.getTrimmedText(selectors.city),
+            "zipcode": await this.getTrimmedText(selectors.zipcode),
+            "mobileNumber": await this.getTrimmedText(selectors.mobileNumber)
         }
     }
 
     getExpectedSignupHeader() {
-        return this.conf.args.signupHeader;
+        return args.signupHeader;
     }
     getExpectedAccountInformation() {
         return {
             "title": true,
-            "username": this.conf.args.username,
-            "email": this.conf.args.email,
-            "password": this.conf.args.password,
+            "username": args.username,
+            "email": args.email,
+            "password": args.password,
             "dateOfBirth": {
-                "day": this.conf.args.dateOfBirth.day,
-                "month": this.conf.args.dateOfBirth.month,
-                "year": this.conf.args.dateOfBirth.year
+                "day": args.dateOfBirth.day,
+                "month": args.dateOfBirth.month,
+                "year": args.dateOfBirth.year
             }
         }
     }
     getExpectedAddressInformation() {
         return {
-            "firstName": this.conf.args.firstName,
-            "lastName": this.conf.args.lastName,
-            "company": this.conf.args.company,
-            "address": this.conf.args.address,
-            "address2": this.conf.args.address2,
-            "country": this.conf.args.country,
-            "state": this.conf.args.state,
-            "city": this.conf.args.city,
-            "zipcode": this.conf.args.zipcode,
-            "mobileNumber": this.conf.args.mobileNumber
+            "firstName": args.firstName,
+            "lastName": args.lastName,
+            "company": args.company,
+            "address": args.address,
+            "address2": args.address2,
+            "country": args.country,
+            "state": args.state,
+            "city": args.city,
+            "zipcode": args.zipcode,
+            "mobileNumber": args.mobileNumber
         }
     }
 }

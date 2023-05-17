@@ -1,5 +1,5 @@
 {
-    "selector" : {
+    "selectors" : {
         "usernameSignup": "[data-qa='signup-name']",
         "emailSignup":"[data-qa='signup-email']",
         "signupBtn": "[data-qa='signup-button']",

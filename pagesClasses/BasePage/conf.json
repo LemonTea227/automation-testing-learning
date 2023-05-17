@@ -1,5 +1,5 @@
 {
-    "selector" : {
+    "selectors" : {
         "homeLogo" : ".logo",
         "homeBtn" : "a[href$='/']",
         "products" : "a[href$='/products']",

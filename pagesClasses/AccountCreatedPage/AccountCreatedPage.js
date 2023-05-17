@@ -1,20 +1,21 @@
 const BasePage = require("../BasePage/BasePage");
+const {selectors, args} = require('./conf.json');
 
 class AccountCreatedPage extends BasePage{
-    constructor(){
-        this.conf = JSON.parse(fs.readFileSync('AccountCreatedPage/conf.json'));
+    constructor(page){
+        this.page = page;
     }
 
     async getAccountCreatedHeader() {
-        return await this.getTrimmedTextFromSelector(this.conf.selector.AccountCreatedHeader);
+        return await this.getTrimmedTextFromSelector(selectors.AccountCreatedHeader);
     }
 
     getExpectedAccountCreated() {
-        return this.conf.AccountCreatedHeader;
+        return args.AccountCreatedHeader;
     }
 
     async clickContinue() {
-        await this.clickBtn(this.conf.selector.continueBtn);
+        await this.clickBtn(selectors.continueBtn);
     }
 
 } 

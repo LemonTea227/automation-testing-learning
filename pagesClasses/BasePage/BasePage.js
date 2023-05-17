@@ -1,10 +1,10 @@
 const fs = require('fs');
 const puppeteer = require('puppeteer');
+const {selectors, args} = require('./conf.json');
 
 class BasePage {
   constructor() {
     this.siteURL = 'https://automationexercise.com/';
-    this.conf = JSON.parse(fs.readFileSync('BasePage/conf.json'));
     this.browser;
     this.page;
   }
@@ -126,12 +126,12 @@ class BasePage {
     ]);
   }
 
-  async BasePageFromBtn() {
-    await this.clickBtn(this.conf.selector.homeBtn);
+  async HomePageFromBtn() {
+    await this.clickBtn(selectors.homeBtn);
   }
 
-  async BasePageFromLogo() {
-    await this.clickBtn(this.conf.selector.homeLogo);
+  async HomePageFromLogo() {
+    await this.clickBtn(selectors.homeLogo);
   }
 };
 

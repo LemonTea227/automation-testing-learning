@@ -1,19 +1,20 @@
 const BasePage = require("../BasePage/BasePage");
+const {selectors, args} = require('./conf.json');
 
 class DeleteAccountPage extends BasePage {
-    constructor(){
-        this.conf = JSON.parse(fs.readFileSync('DeleteAccountPage/conf.json'));
+    constructor(page){
+        this.page = page;
     }
     
     async getAccountDeletedHeader() {
-        return await this.getTrimmedTextFromSelector(this.conf.selector.AccountDeletedHeader);
+        return await this.getTrimmedTextFromSelector(selectors.AccountDeletedHeader);
     }
 
     getExpectedAccountDeleted() {
-        return this.conf.args.AccountDeletedHeader;
+        return args.AccountDeletedHeader;
     }
 
     async clickContinue() {
-        await this.clickBtn(this.conf.selector.continueBtn);
+        await this.clickBtn(selectors.continueBtn);
     }
 }

@@ -1,15 +1,16 @@
 const BasePage = require("../BasePage/BasePage");
+const {selectors, args} = require('./conf.json');
 
 class ContactUsPage extends BasePage {
-    constructor() {
-        this.conf = JSON.parse(fs.readFileSync('ContactUsPage/conf.json'));
+    constructor(page) {
+        this.page = page;
     }
 
     async uploadFileToForm() {
-        await this.uploadFile(this.conf.selector.fileInput, this.conf.args.filePath);
+        await this.uploadFile(selectors.fileInput, args.filePath);
     }
     async submitContactUsForm() {
-        await this.submitForm(this.conf.selector.submitBtn);
+        await this.submitForm(selectors.submitBtn);
     }
     async dialogSubmitAccept() {
         await this.dialogAccept();
@@ -17,34 +18,34 @@ class ContactUsPage extends BasePage {
 
 
     async getGetInTouchHeader() {
-        return await this.getTrimmedText(this.conf.selector.contactUsHeader);
+        return await this.getTrimmedText(selectors.contactUsHeader);
     }
 
     getExpectedGetInTouchHeader() {
-        return this.conf.args.contactUsHeader;
+        return args.contactUsHeader;
     }
 
     async getContactUsFormInfo() {
         return {
-            "username": await this.getTypedValue(this.conf.selector.fullName),
-            "email": await this.getTypedValue(this.conf.selector.email),
-            "subject": await this.getTypedValue(this.conf.selector.subject),
-            "message": await this.getTypedValue(this.conf.selector.message)
+            "username": await this.getTypedValue(selectors.fullName),
+            "email": await this.getTypedValue(selectors.email),
+            "subject": await this.getTypedValue(selectors.subject),
+            "message": await this.getTypedValue(selectors.message)
         };
     }
     getExpectedContactUsFormInfo() {
         return {
-            "name": this.conf.args.fullName,
-            "email": this.conf.args.email,
-            "subject": this.conf.args.subject,
-            "message": this.conf.args.message
+            "name": args.fullName,
+            "email": args.email,
+            "subject": args.subject,
+            "message": args.message
         };
     }
 
     async typeContactUsFormInfo() {
-        await this.typeToSelector(this.conf.selector.fullName, this.conf.args.fullName);
-        await this.typeToSelector(this.conf.selector.email, this.conf.args.email);
-        await this.typeToSelector(this.conf.selector.subject, this.conf.args.subject);
-        await this.typeToSelector(this.conf.selector.message, this.conf.args.message);
+        await this.typeToSelector(selectors.fullName, args.fullName);
+        await this.typeToSelector(selectors.email, args.email);
+        await this.typeToSelector(selectors.subject, args.subject);
+        await this.typeToSelector(selectors.message, args.message);
     }
 }

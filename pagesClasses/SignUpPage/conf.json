@@ -1,5 +1,5 @@
 {
-    "selector": {
+    "selectors": {
         "signupHeader":"h2 b",
         "username": "[data-qa='name']",
         "email": "[data-qa='email']",

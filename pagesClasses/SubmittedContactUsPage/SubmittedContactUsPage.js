@@ -1,19 +1,20 @@
 const BasePage = require("../BasePage/BasePage");
+const {selectors, args} = require('./conf.json');
 
 class SubmittedContactUsPage extends BasePage{
-    constructor(){
-        this.conf = JSON.parse(fs.readFileSync('SubmittedContactUsPage/conf.json'));
+    constructor(page){
+        this.page = page;
     }
 
     async getGetInTouchHeader() {
-        return await this.getTrimmedText(this.conf.selector.contactUsHeader);
+        return await this.getTrimmedText(selectors.contactUsHeader);
     }
 
     getExpectedGetInTouchHeader() {
-        return this.conf.args.contactUsHeader;
+        return args.contactUsHeader;
     }
 
     async clickHome() {
-        await this.clickBtn(this.conf.selector.homeFormBtn);
+        await this.clickBtn(selectors.homeFormBtn);
     }
 }

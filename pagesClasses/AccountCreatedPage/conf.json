@@ -1,5 +1,5 @@
 {
-    "selector" : {
+    "selectors" : {
         "AccountCreatedHeader": "[data-qa='account-created']",
         "continueBtn": "[data-qa='continue-button']"
     },

@@ -1,4 +1,4 @@
-const BasePage = require("../BasePage/BasePage");
+const BasePage = require("../BasePage/BasePage.js");
 const {selectors, args} = require('./conf.json');
 
 class AccountCreatedPage extends BasePage{
@@ -19,3 +19,5 @@ class AccountCreatedPage extends BasePage{
     }
 
 } 
+
+module.exports = AccountCreatedPage;

@@ -1,5 +1,5 @@
-const BasePage = require("../BasePage/BasePage");
-const {selectors, args} = require('./conf.json');
+const BasePage = require("../BasePage/BasePage.js");
+const { selectors, args } = require('./conf.json');
 
 class SignUpPage extends BasePage {
     constructor(page) {
@@ -14,6 +14,14 @@ class SignUpPage extends BasePage {
     }
     async checkOffers() {
         await this.clickBtn(selectors.offers);
+    }
+
+    async getCheckedStatus(selector) {
+        await (await (await this.page.$(selector)).getProperty('checked')).jsonValue()
+    }
+
+    async selectOption(selector, valueToSelect) {
+        await this.page.select(selector, valueToSelect);
     }
 
     async fillAccountInformation() {
@@ -99,3 +107,5 @@ class SignUpPage extends BasePage {
         }
     }
 }
+
+module.exports = SignUpPage;

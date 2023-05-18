@@ -1,5 +1,5 @@
-const BasePage = require("../BasePage/BasePage");
-const {selectors, args} = require('./conf.json');
+const BasePage = require("../BasePage/BasePage.js");
+const { selectors, args } = require('./conf.json');
 
 class ContactUsPage extends BasePage {
     constructor(page) {
@@ -14,6 +14,27 @@ class ContactUsPage extends BasePage {
     }
     async dialogSubmitAccept() {
         await this.dialogAccept();
+    }
+    async uploadFile(selector, pathToFile) {
+        await (await this.page.$(selector)).uploadFile(pathToFile);
+    }
+
+    async dialogAccept() {
+        await Promise.all([
+            this.page.on('dialog', async dialog => {
+                await dialog.accept();
+            }),
+            await page.waitForNetworkIdle(), // check moving line to dialogAccept
+        ])
+
+    }
+
+    async submitForm(selector) {
+        await Promise.all([
+            page.$eval(selector, element =>
+                element.click()
+            )
+        ]);
     }
 
 
@@ -49,3 +70,5 @@ class ContactUsPage extends BasePage {
         await this.typeToSelector(selectors.message, args.message);
     }
 }
+
+module.exports = ContactUsPage;

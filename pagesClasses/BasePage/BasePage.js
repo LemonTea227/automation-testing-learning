@@ -38,6 +38,8 @@ class BasePage {
 
     // go to test site and wait for it to load fully
     await this.goToSite();
+
+    return this.page;
   }
 
   async getCurrentURL() {
@@ -79,17 +81,9 @@ class BasePage {
       });
   }
 
-  async getCheckedStatus(selector) {
-    await (await (await page.$(selector)).getProperty('checked')).jsonValue()
-  }
-
-  async selectOption(selector, valueToSelect){
-    await page.select(selector,valueToSelect);
-  }
-
-  async getSelected(selector) {
-    return await await page.evaluate(x => x.value, (await page.$(selector)));
-  }
+  // async getSelected(selector) {
+  //   return await await this.page.evaluate(x => x.value, (await page.$(selector)));
+  // }
 
   async getTrimmedText(selector) {
     return await this.getSelectorValue(selector).trim();
@@ -107,31 +101,40 @@ class BasePage {
     await this.page.type(selector, text);
   }
 
-  async uploadFile(selector, pathToFile) {
-    await (await this.page.$(selector)).uploadFile(pathToFile);
-  }
+  
 
-  async dialogAccept() {
-    this.page.on('dialog', async dialog => {
-      await dialog.accept();
-    })
-  }
-
-  async submitForm(selector) {
-    await Promise.all([
-      page.$eval('input[type=submit]', element =>
-        element.click()
-      ),
-      await page.waitForNetworkIdle(), // check moving line to dialogAccept
-    ]);
-  }
-
-  async HomePageFromBtn() {
+  async homePageFromBtn() {
     await this.clickBtn(selectors.homeBtn);
   }
-
-  async HomePageFromLogo() {
+  async homePageFromLogo() {
     await this.clickBtn(selectors.homeLogo);
+  }
+  async goToProducts() {
+    await this.clickBtn(selectors.products);
+  }
+  async goToCart() {
+    await this.clickBtn(selectors.cart);
+  }
+  async goToSignupLogin() {
+    await this.clickBtn(selectors.signupLogin);
+  }
+  async goToTestCases() {
+    await this.clickBtn(selectors.testCases);
+  }
+  async goToAPITesting() {
+    await this.clickBtn(selectors.APITesting);
+  }
+  async goToVideoTutorials() {
+    await this.clickBtn(selectors.videoTutorials);
+  }
+  async goToContactUs() {
+    await this.clickBtn(selectors.contactUs);
+  }
+  async goToLogout() {
+    await this.clickBtn(selectors.logout);
+  }
+  async goToDeleteAccount() {
+    await this.clickBtn(selectors.deleteAccount);
   }
 };
 

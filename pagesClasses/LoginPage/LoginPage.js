@@ -1,8 +1,9 @@
-const BasePage = require("../BasePage/BasePage");
+const BasePage = require("../BasePage/BasePage.js");
 const {selectors, args} = require('./conf.json');
 
 class LoginPage extends BasePage {
     constructor(page) {
+        super();
         this.page = page;
     }
 
@@ -11,6 +12,13 @@ class LoginPage extends BasePage {
     }
     async clickLogin() {
         await this.clickBtn(selectors.loginBtn);
+    }
+
+    async verifySignupHeader() {
+        return await this.waitForSelectorToBeVisible(selectors.signupHeader);
+    }
+    async verifyLoginHeader() {
+        return await this.waitForSelectorToBeVisible(selectors.loginHeader);
     }
 
 
@@ -62,3 +70,5 @@ class LoginPage extends BasePage {
         await this.typeToSelector(selectors.email, args.emailSignup);
     }
 }
+
+module.exports = LoginPage;

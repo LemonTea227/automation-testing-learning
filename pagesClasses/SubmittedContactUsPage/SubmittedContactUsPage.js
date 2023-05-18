@@ -1,4 +1,4 @@
-const BasePage = require("../BasePage/BasePage");
+const BasePage = require("../BasePage/BasePage.js");
 const {selectors, args} = require('./conf.json');
 
 class SubmittedContactUsPage extends BasePage{
@@ -18,3 +18,5 @@ class SubmittedContactUsPage extends BasePage{
         await this.clickBtn(selectors.homeFormBtn);
     }
 }
+
+module.exports = SubmittedContactUsPage;

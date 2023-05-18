@@ -1,4 +1,4 @@
-const BasePage = require("../BasePage/BasePage");
+const BasePage = require("../BasePage/BasePage.js");
 const {selectors, args} = require('./conf.json');
 
 class DeleteAccountPage extends BasePage {
@@ -18,3 +18,5 @@ class DeleteAccountPage extends BasePage {
         await this.clickBtn(selectors.continueBtn);
     }
 }
+
+module.exports = DeleteAccountPage;

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const puppeteer = require('puppeteer');
-const {selectors, args} = require('./conf.json');
+const { selectors, args } = require('./conf.json');
 
 class BasePage {
   constructor() {
@@ -86,7 +86,7 @@ class BasePage {
   // }
 
   async getTrimmedText(selector) {
-    return await this.getSelectorValue(selector).trim();
+    return (await this.getSelectorValue(selector)).trim();
   }
 
   async getSelectorValue(selector) {
@@ -94,14 +94,14 @@ class BasePage {
   }
 
   async getTypedValue(selector) {
-    return await this.page.evaluate(x => x.value, (await page.$(selector)));
+    return await this.page.evaluate(x => x.value, (await this.page.$(selector)));
   }
 
   async typeToSelector(selector, text) {
     await this.page.type(selector, text);
   }
 
-  
+
 
   async homePageFromBtn() {
     await this.clickBtn(selectors.homeBtn);

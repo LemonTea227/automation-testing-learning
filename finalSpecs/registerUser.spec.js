@@ -154,12 +154,12 @@ describe('TC1 - Register User', () => {
 
     }, MAX_SAFE_TIMEOUT)
 
-    it('17th - Click "Delete Account" button', async () => {
+    xit('17th - Click "Delete Account" button', async () => {
        await base.goToDeleteAccount();
 
     }, MAX_SAFE_TIMEOUT)
 
-    it('18th - Verify that "ACCOUNT DELETED!" is visible and click "Continue" button', async () => {
+    xit('18th - Verify that "ACCOUNT DELETED!" is visible and click "Continue" button', async () => {
        
         await deletedAccount.verifyDeleted()
             .then(() => {

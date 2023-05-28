@@ -24,7 +24,6 @@ class LoginPage extends BasePage {
         return await this.waitForSelectorToBeVisible(selectors.incorrectLoginHeader);
     }
 
-
     async getSignup() {
         return {
             "username": await this.getTypedValue(selectors.usernameSignup),
@@ -68,6 +67,9 @@ class LoginPage extends BasePage {
     }
     getExpectedIncorrectLoginHeader() {
         return args.incorrectLoginHeader;
+    }
+    getExpectedLoginURL() {
+        return args.loginURL;
     }
 
     async typeSignup() {

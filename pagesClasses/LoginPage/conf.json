@@ -16,6 +16,7 @@
         "password": "testTavor123$",
         "signupHeader": "New User Signup!",
         "loginHeader": "Login to your account",
-        "incorrectLoginHeader": "Your email or password is incorrect!"
+        "incorrectLoginHeader": "Your email or password is incorrect!",
+        "loginURL": "https://automationexercise.com/login"
     }
 }

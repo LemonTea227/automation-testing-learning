@@ -3,6 +3,7 @@ const { selectors, args } = require('./conf.json');
 
 class SignUpPage extends BasePage {
     constructor(page) {
+        super();
         this.page = page;
     }
 
@@ -17,11 +18,19 @@ class SignUpPage extends BasePage {
     }
 
     async getCheckedStatus(selector) {
-        await (await (await this.page.$(selector)).getProperty('checked')).jsonValue()
+        return await (await (await this.page.$(selector)).getProperty('checked')).jsonValue();
     }
 
     async selectOption(selector, valueToSelect) {
         await this.page.select(selector, valueToSelect);
+    }
+
+    async getSelected(selector) {
+        return await this.page.evaluate(x => x.value, (await this.page.$(selector)));
+    }
+
+    async verifySignupHeader() {
+        return await this.waitForSelectorToBeVisible(selectors.signupHeader);
     }
 
     async fillAccountInformation() {
@@ -51,9 +60,9 @@ class SignUpPage extends BasePage {
     async getAccountInformation() {
         return {
             "title": await this.getCheckedStatus(selectors.title),
-            "username": await this.getTrimmedText(selectors.username),
-            "email": await this.getTrimmedText(selectors.email1),
-            "password": await this.getTrimmedText(selectors.password),
+            "username": await this.getTypedValue(selectors.username),
+            "email": await this.getTypedValue(selectors.email),
+            "password": await this.getTypedValue(selectors.password),
             "dateOfBirth": {
                 "day": await this.getSelected(selectors.dateOfBirth.day),
                 "month": await this.getSelected(selectors.dateOfBirth.month),
@@ -63,16 +72,16 @@ class SignUpPage extends BasePage {
     }
     async getAddressInformation() {
         return {
-            "firstName": await this.getTrimmedText(selectors.firstName),
-            "lastName": await this.getTrimmedText(selectors.lastName),
-            "company": await this.getTrimmedText(selectors.company),
-            "address": await this.getTrimmedText(selectors.address),
-            "address2": await this.getTrimmedText(selectors.address2),
-            "country": await this.getTrimmedText(selectors.country),
-            "state": await this.getTrimmedText(selectors.state),
-            "city": await this.getTrimmedText(selectors.city),
-            "zipcode": await this.getTrimmedText(selectors.zipcode),
-            "mobileNumber": await this.getTrimmedText(selectors.mobileNumber)
+            "firstName": await this.getTypedValue(selectors.firstName),
+            "lastName": await this.getTypedValue(selectors.lastName),
+            "company": await this.getTypedValue(selectors.company),
+            "address": await this.getTypedValue(selectors.address),
+            "address2": await this.getTypedValue(selectors.address2),
+            "country": await this.getTypedValue(selectors.country),
+            "state": await this.getTypedValue(selectors.state),
+            "city": await this.getTypedValue(selectors.city),
+            "zipcode": await this.getTypedValue(selectors.zipcode),
+            "mobileNumber": await this.getTypedValue(selectors.mobileNumber)
         }
     }
 

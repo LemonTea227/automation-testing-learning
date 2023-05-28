@@ -3,11 +3,16 @@ const {selectors, args} = require('./conf.json');
 
 class DeleteAccountPage extends BasePage {
     constructor(page){
+        super();
         this.page = page;
+    }
+
+    async verifyDeleted() {
+        return await this.waitForSelectorToBeVisible(selectors.AccountDeletedHeader);
     }
     
     async getAccountDeletedHeader() {
-        return await this.getTrimmedTextFromSelector(selectors.AccountDeletedHeader);
+        return await this.getTrimmedText(selectors.AccountDeletedHeader);
     }
 
     getExpectedAccountDeleted() {

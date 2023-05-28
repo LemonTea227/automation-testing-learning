@@ -1,6 +1,6 @@
 {
     "selectors": {
-        "signupHeader":"h2 b",
+        "signupHeader": "h2 b",
         "username": "[data-qa='name']",
         "email": "[data-qa='email']",
         "title": "[id='id_gender1']",
@@ -21,11 +21,11 @@
         "zipcode": "[data-qa='zipcode']",
         "mobileNumber": "[data-qa='mobile_number']",
         "newsletter": "#newsletter",
-        "offers":"#optin",
+        "offers": "#optin",
         "createAccountBtn": "[data-qa='create-account']"
     },
     "args": {
-        "signupHeader":"Enter Account Information",
+        "signupHeader": "Enter Account Information",
         "username": "testTavor",
         "email": "testTavor@gmail.com",
         "title": "Mr.",

@@ -1,5 +1,5 @@
 const BasePage = require("../BasePage/BasePage.js");
-const {selectors, args} = require('./conf.json');
+const { selectors, args } = require('./conf.json');
 
 class LoginPage extends BasePage {
     constructor(page) {

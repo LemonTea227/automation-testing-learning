@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const jasmine = require('jasmine');
-const BasePage = require('../../pagesClasses/BasePage/BasePage.js');
-const LoginPage = require('../../pagesClasses/LoginPage/LoginPage.js');
+const BasePage = require('../pagesClasses/BasePage/BasePage.js');
+const LoginPage = require('../pagesClasses/LoginPage/LoginPage.js');
 
 // const base = new BasePage();
 

@@ -136,6 +136,21 @@ class BasePage {
   async goToDeleteAccount() {
     await this.clickBtn(selectors.deleteAccount);
   }
+
+  async waitForSignupLogin() {
+    return await this.waitForSelectorToBeVisible(selectors.signupLogin);
+  }
+
+  async verifyLoggedInAs() {
+    return await this.waitForSelectorToBeVisible(selectors.loggedAs);
+  }
+
+  async getLoggedInAs() {
+    return await this.getTrimmedText(selectors.loggedAs);
+  }
+  getExpectedLoggedInAs() {
+    return args.loggedAs;
+  }
 };
 
 module.exports = BasePage; // 👈 Export class

@@ -3,6 +3,7 @@ const {selectors, args} = require('./conf.json');
 
 class SubmittedContactUsPage extends BasePage{
     constructor(page){
+        super();
         this.page = page;
     }
 

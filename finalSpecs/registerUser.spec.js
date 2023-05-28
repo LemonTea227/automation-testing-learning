@@ -1,11 +1,11 @@
 const fs = require('fs');
 const puppeteer = require('puppeteer');
 const jasmine = require('jasmine');
-const BasePage = require('../../pagesClasses/BasePage/BasePage.js');
-const LoginPage = require('../../pagesClasses/LoginPage/LoginPage.js');
-const SignupPage = require('../../pagesClasses/SignupPage/SignupPage.js');
-const AccountCreatedPage = require('../../pagesClasses/AccountCreatedPage/AccountCreatedPage.js');
-const DeleteAccountPage = require('../../pagesClasses/DeleteAccountPage/DeleteAccountPage.js');
+const BasePage = require('../pagesClasses/BasePage/BasePage.js');
+const LoginPage = require('../pagesClasses/LoginPage/LoginPage.js');
+const SignupPage = require('../pagesClasses/SignupPage/SignupPage.js');
+const AccountCreatedPage = require('../pagesClasses/AccountCreatedPage/AccountCreatedPage.js');
+const DeleteAccountPage = require('../pagesClasses/DeleteAccountPage/DeleteAccountPage.js');
 
 const MAX_SAFE_TIMEOUT = Math.pow(2, 31) - 1;
 const siteURL = 'https://automationexercise.com/';

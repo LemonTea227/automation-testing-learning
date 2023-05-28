@@ -7,7 +7,7 @@
         "emailLogin": "[data-qa='login-email']",
         "passwordLogin": "[data-qa='login-password']",
         "loginBtn": "[data-qa='login-button']",
-        "loginHeader": ".signup-form h2"
+        "loginHeader": ".login-form h2"
     },
     "args": {
         "username": "testTavor",

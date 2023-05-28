@@ -66,7 +66,7 @@ class LoginPage extends BasePage {
         await this.typeToSelector(selectors.emailSignup, args.email);
     }
     async typeLogin() {
-        await this.typeToSelector(selectors.usernameLogin, args.username);
+        await this.typeToSelector(selectors.emailLogin, args.email);
         await this.typeToSelector(selectors.passwordLogin, args.password);
     }
 }

@@ -2,24 +2,22 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 const jasmine = require('jasmine');
 
-const BasePage = require('../../pagesClasses/BasePage/BasePage.js');
-const LoginPage = require('../../pagesClasses/LoginPage/LoginPage.js');
-const DeleteAccountPage = require('../../pagesClasses/DeleteAccountPage/DeleteAccountPage.js');
+const BasePage = require('../pagesClasses/BasePage/BasePage.js');
+const LoginPage = require('../pagesClasses/LoginPage/LoginPage.js');
 
 const MAX_SAFE_TIMEOUT = Math.pow(2, 31) - 1;
 const siteURL = 'https://automationexercise.com/';
 
-describe('TC2 - Login User with correct email and password', () => {
+
+describe('TC3 - Login User with incorrect email and password', () => {
     let base;
     let page;
     let login;
-    let deletedAccount;
 
     beforeAll(async () => {
         base = new BasePage();
         page = await base.openSite();
         login = new LoginPage(page);
-        deletedAccount = new DeleteAccountPage(page);
     }, MAX_SAFE_TIMEOUT)
 
     it('1st & 2nd - open the testing site', async () => {
@@ -73,8 +71,8 @@ describe('TC2 - Login User with correct email and password', () => {
         await login.clickLogin();
     }, MAX_SAFE_TIMEOUT)
 
-    it('8th - Verify that "Logged in as username" is visible', async () => {
-        await base.verifyLoggedInAs()
+    it('8th - Verify that "Your email or password is incorrect!" is visible', async () => {
+        await login.verifyIncorrectLoginHeader()
             .then(() => {
                 expect(true).toBe(true);
             })
@@ -83,32 +81,9 @@ describe('TC2 - Login User with correct email and password', () => {
                 expect(true).toBe(false);
             });
 
-        expect(await base.getLoggedInAs()).toBe(base.getExpectedLoggedInAs());
+        expect(await login.getIncorrectLoginHeader()).toBe(login.getExpectedIncorrectLoginHeader());
 
     }, MAX_SAFE_TIMEOUT)
-
-    it('9th - Click "Delete Account" button', async () => {
-        await base.goToDeleteAccount();
- 
-     }, MAX_SAFE_TIMEOUT)
- 
-     it('10th - Verify that "ACCOUNT DELETED!" is visible and click "Continue" button', async () => {
-        
-         await deletedAccount.verifyDeleted()
-             .then(() => {
-                 expect(true).toBe(true);
-             })
-             .catch(err => {
-                 console.log('>>>ERROR - ' + err);
-                 expect(true).toBe(false);
-             });
- 
-         //check if the text of 'ENTER ACCOUNT INFORMATION' is correct
-         expect(await deletedAccount.getAccountDeletedHeader()).toBe(deletedAccount.getExpectedAccountDeleted());
- 
-        //  await deletedAccount.clickContinue();
-     }, MAX_SAFE_TIMEOUT)
-
 
     // await browser.close();
 })

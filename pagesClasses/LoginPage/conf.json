@@ -7,13 +7,15 @@
         "emailLogin": "[data-qa='login-email']",
         "passwordLogin": "[data-qa='login-password']",
         "loginBtn": "[data-qa='login-button']",
-        "loginHeader": ".login-form h2"
+        "loginHeader": ".login-form h2",
+        "incorrectLoginHeader": ".login-form p"
     },
     "args": {
         "username": "testTavor",
         "email": "testTavor@gmail.com",
         "password": "testTavor123$",
         "signupHeader": "New User Signup!",
-        "loginHeader": "Login to your account"
+        "loginHeader": "Login to your account",
+        "incorrectLoginHeader": "Your email or password is incorrect!"
     }
 }

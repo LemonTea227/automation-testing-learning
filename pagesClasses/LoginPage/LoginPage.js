@@ -23,6 +23,9 @@ class LoginPage extends BasePage {
     async verifyIncorrectLoginHeader() {
         return await this.waitForSelectorToBeVisible(selectors.incorrectLoginHeader);
     }
+    async verifyEmailExistsSignupHeader() {
+        return await this.waitForSelectorToBeVisible(selectors.emailExistsSignupHeader);
+    }
 
     async getSignup() {
         return {
@@ -44,6 +47,9 @@ class LoginPage extends BasePage {
     }
     async getIncorrectLoginHeader() {
         return await this.getTrimmedText(selectors.incorrectLoginHeader);
+    }
+    async getEmailExistsSignupHeader() {
+        return await this.getTrimmedText(selectors.emailExistsSignupHeader);
     }
 
 
@@ -67,6 +73,9 @@ class LoginPage extends BasePage {
     }
     getExpectedIncorrectLoginHeader() {
         return args.incorrectLoginHeader;
+    }
+    getExpectedEmailExistsSignupHeader() {
+        return args.emailExistsSignupHeader;
     }
     getExpectedLoginURL() {
         return args.loginURL;

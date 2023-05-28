@@ -8,7 +8,8 @@
         "passwordLogin": "[data-qa='login-password']",
         "loginBtn": "[data-qa='login-button']",
         "loginHeader": ".login-form h2",
-        "incorrectLoginHeader": ".login-form p"
+        "incorrectLoginHeader": ".login-form p",
+        "emailExistsSignupHeader":"form [style='color: red;']"
     },
     "args": {
         "username": "testTavor",
@@ -17,6 +18,7 @@
         "signupHeader": "New User Signup!",
         "loginHeader": "Login to your account",
         "incorrectLoginHeader": "Your email or password is incorrect!",
-        "loginURL": "https://automationexercise.com/login"
+        "loginURL": "https://automationexercise.com/login",
+        "emailExistsSignupHeader":"Email Address already exist!"
     }
 }

@@ -7,12 +7,16 @@ class SubmittedContactUsPage extends BasePage{
         this.page = page;
     }
 
-    async getGetInTouchHeader() {
-        return await this.getTrimmedText(selectors.contactUsHeader);
+    async verifySuccessHeader() {
+        return await this.waitForSelectorToBeVisible(selectors.successHeader);
     }
 
-    getExpectedGetInTouchHeader() {
-        return args.contactUsHeader;
+    async getSuccessHeader() {
+        return await this.getTrimmedText(selectors.successHeader);
+    }
+
+    getExpectedSuccessHeader() {
+        return args.successHeader;
     }
 
     async clickHome() {

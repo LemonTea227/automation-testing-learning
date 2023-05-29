@@ -19,23 +19,36 @@ class ContactUsPage extends BasePage {
     async uploadFile(selector, pathToFile) {
         await (await this.page.$(selector)).uploadFile(pathToFile);
     }
+    async waitForLoad() {
+        await this.page.waitForNetworkIdle();
+    }
 
-    async dialogAccept() {
+    // async dialogAccept() {
+    //     await Promise.all([
+    //         this.page.on('dialog', async dialog => {
+    //             await dialog.accept();
+    //         }),
+    //         this.waitForLoad(), // check moving line to dialogAccept
+    //     ])
+
+    // }
+
+    async submitForm(selector) {
+        // await this.page.$eval(selector, element => element.click())
+
         await Promise.all([
             this.page.on('dialog', async dialog => {
                 await dialog.accept();
             }),
-            await page.waitForNetworkIdle(), // check moving line to dialogAccept
-        ])
-
+            this.page.$eval(selector, element =>
+                element.click()
+            ),
+            this.waitForLoad(),
+        ]);
     }
 
-    async submitForm(selector) {
-        await Promise.all([
-            page.$eval(selector, element =>
-                element.click()
-            )
-        ]);
+    async verifyGetInTouchHeader() {
+        return await this.waitForSelectorToBeVisible(selectors.contactUsHeader);
     }
 
 
@@ -49,7 +62,7 @@ class ContactUsPage extends BasePage {
 
     async getContactUsFormInfo() {
         return {
-            "username": await this.getTypedValue(selectors.fullName),
+            "name": await this.getTypedValue(selectors.fullName),
             "email": await this.getTypedValue(selectors.email),
             "subject": await this.getTypedValue(selectors.subject),
             "message": await this.getTypedValue(selectors.message)

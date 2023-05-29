@@ -144,6 +144,9 @@ class BasePage {
   async verifyLoggedInAs() {
     return await this.waitForSelectorToBeVisible(selectors.loggedAs);
   }
+  async verifySignupLoginBtn() {
+    return await this.waitForSelectorToBeVisible(selectors.signupLogin);
+  }
 
   async getLoggedInAs() {
     return await this.getTrimmedText(selectors.loggedAs);

@@ -2,8 +2,8 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 const jasmine = require('jasmine');
 
-const BasePage = require('../../pagesClasses/BasePage/BasePage.js');
-const LoginPage = require('../../pagesClasses/LoginPage/LoginPage.js');
+const BasePage = require('../pagesClasses/BasePage/BasePage.js');
+const LoginPage = require('../pagesClasses/LoginPage/LoginPage.js');
 
 const MAX_SAFE_TIMEOUT = Math.pow(2, 31) - 1;
 const siteURL = 'https://automationexercise.com/';

@@ -8,53 +8,52 @@ const LoginPage = require('../pagesClasses/LoginPage/LoginPage.js');
 const MAX_SAFE_TIMEOUT = Math.pow(2, 31) - 1;
 
 describe("Testing the BasePage class main functions", () => {
-    let base;
+    /** @type {BasePage} */
+    let basePage;
     let page;
-    let login;
+    /** @type {LoginPage} */
+    let loginPage;
 
     beforeAll(async () => {
-        base = new BasePage();
-        page = await base.openSite();
-        login = new LoginPage(page);
+        basePage = new BasePage();
+        page = await basePage.openSite();
+        loginPage = new LoginPage(page);
     }, MAX_SAFE_TIMEOUT)
 
     it("open the site", async () => {
         // await base.openSite();
-        expect(base.browser).not.toBe(undefined);
-        expect(base.page).not.toBe(undefined);
+        expect(basePage.browser).not.toBe(undefined);
+        expect(basePage.page).not.toBe(undefined);
     }, MAX_SAFE_TIMEOUT)
 
     it("check url opened", async () => {
-        expect(await base.getCurrentURL()).toBe(base.siteURL);
+        expect(await basePage.getCurrentURL()).toBe(basePage.siteURL);
     }, MAX_SAFE_TIMEOUT)
 
     it("check url opened", async () => {
-        expect(await base.getCurrentURL()).toBe(base.siteURL);
+        expect(await basePage.getCurrentURL()).toBe(basePage.siteURL);
     }, MAX_SAFE_TIMEOUT)
 
     it("click a button", async () => {
-        await base.goToSignupLogin()
-        expect(await base.getCurrentURL()).toBe(base.siteURL + 'login')
+        await basePage.goToSignupLogin()
+        expect(await basePage.getCurrentURL()).toBe(basePage.siteURL + 'login')
     }, MAX_SAFE_TIMEOUT)
 
     it("wait for selector to be visible", async () => {
-        await login.verifySignupHeader()
-            .then(() => {
-                expect(true).toBe(true);
-            })
-            .catch((err) => {
-                console.log(err);
-                expect(false).toBe(true);
-            })
+        await loginPage.verifyLoginPageSignup()
     }, MAX_SAFE_TIMEOUT)
 
     it("check get trimmed text", async () => {
-        expect(await login.getSignupHeader()).toBe(login.getExpectedSignupHeader());
+        expect(await loginPage.getSignupHeader()).toBe(loginPage.args.signupHeader);
     }, MAX_SAFE_TIMEOUT)
 
     it("type to selector", async () => {
-        await login.typeSignup();
-        expect(await login.getSignup()).toEqual(login.getExpectedSignup())
+        await loginPage.typeSignup();
+        let signupObj = await loginPage.getSignup();
+
+        for (let i = 0; i < Object.keys(signupObj).length; i++) {
+            expect(signupObj[Object.keys(signupObj)[i]]).toBe(loginPage.args[Object.keys(loginPage.args)[i]]);
+        }
     }, MAX_SAFE_TIMEOUT)
 
 })

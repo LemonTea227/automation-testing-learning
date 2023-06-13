@@ -1,0 +1,13 @@
+{
+    "selectors": {
+        "viewFirstProduct": ".choose ul a[href='/product_details/1']",
+        "signupLogin": "a[href$='/login']",
+        "products": ".product-image-wrapper",
+        "viewProducts": ".choose a",
+        "addProductsToCarts": ".overlay-content a"
+
+    }, 
+    "args": {
+
+    }
+}

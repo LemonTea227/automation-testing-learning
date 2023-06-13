@@ -28,7 +28,7 @@
         "signupHeader": "Enter Account Information",
         "username": "testTavor",
         "email": "testTavor@gmail.com",
-        "title": "Mr.",
+        "title": true, 
         "password": "testTavor123$",
         "dateOfBirth": {
             "day": "22",

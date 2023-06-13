@@ -1,0 +1,24 @@
+{
+    "selectors": {
+        "ProductsHeader": ".features_items h2",
+        "featuredItemsList": ".features_items",
+        "firstItem": ".col-sm-4:first-of-type",
+        "firstItemViewProduct": "[href='/product_details/1']",
+        "firstItemAddToCart":".productinfo a[data-product-id='1']",
+        "secondItemAddToCart":".productinfo a[data-product-id='2']",
+        "searchBar": "#search_product",
+        "searchBtn": "#submit_search",
+        "searchedProductsResultsText": ".productinfo.text-center p",
+        "continueShoppingBtn": ".modal-footer button",
+        "viewCartBtn":"p [href='/view_cart']",
+        "products": ".product-image-wrapper",
+        "viewProducts": ".choose a",
+        "addProductsToCarts": ".overlay-content a"
+    },
+    "args": {
+        "allProductsHeader": "ALL PRODUCTS",
+        "productToSearch": "Blue Top",
+        "searchedProductsHeader": "SEARCHED PRODUCTS",
+        "productsURL": "https://automationexercise.com/products"
+    }
+}

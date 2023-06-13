@@ -1,0 +1,8 @@
+{
+    "selectors":{
+        "testCasesHeader":"b"
+    },
+    "args":{
+        "testCasesURL": "https://automationexercise.com/test_cases"
+    }
+}

@@ -11,9 +11,17 @@
         "contactUs": "a[href$='/contact_us']",
         "logout": "a[href$='/logout']",
         "deleteAccount": "a[href$='/delete_account']",
-        "loggedAs": ".nav.navbar-nav li:last-child"
+        "loggedAs": ".nav.navbar-nav li:last-child",
+        "SubscriptionFooter": ".footer-widget",
+        "SubscriptionHeader": ".footer-widget h2",
+        "subscribeEmailInput": "#susbscribe_email",
+        "subscribeBtn": "#subscribe",
+        "successSubscribeHeder": "#success-subscribe"
     },
     "args": {
-        "loggedAs": "Logged in as testTavor"
+        "loggedAs": "Logged in as testTavor",
+        "subscriptionEmail": "testTavor@gmail.com",
+        "SubscriptionHeader": "Subscription",
+        "successSubscribeHeder":"You have been successfully subscribed!"
     }
 }

@@ -4,20 +4,22 @@ const {selectors, args} = require('./conf.json');
 class SubmittedContactUsPage extends BasePage{
     constructor(page){
         super();
+        /** @type {puppeteer.Page} */
         this.page = page;
+        this.args = args;
     }
 
-    async verifySuccessHeader() {
-        return await this.waitForSelectorToBeVisible(selectors.successHeader);
+    async verifySubmittedContactUsPage() {
+        await this.waitForSelectorToBeVisible(selectors.successHeader);
     }
 
     async getSuccessHeader() {
         return await this.getTrimmedText(selectors.successHeader);
     }
 
-    getExpectedSuccessHeader() {
-        return args.successHeader;
-    }
+    // getExpectedSuccessHeader() {
+    //     return args.successHeader;
+    // }
 
     async clickHome() {
         await this.clickBtn(selectors.homeFormBtn);

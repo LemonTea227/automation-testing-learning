@@ -1,91 +1,73 @@
-const fs = require('fs');
 const puppeteer = require('puppeteer');
-const jasmine = require('jasmine');
-
 const BasePage = require('../pagesClasses/BasePage/BasePage.js');
 const LoginPage = require('../pagesClasses/LoginPage/LoginPage.js');
+const HomePage = require('../pagesClasses/HomePage/HomePage.js');
 
 const MAX_SAFE_TIMEOUT = Math.pow(2, 31) - 1;
-const siteURL = 'https://automationexercise.com/';
 
 describe('TC5 - Register User with existing email', () => {
-    let base;
+    /** @type {BasePage} */
+    let basePage;
+    /** @type {puppeteer.Page} */
     let page;
-    let login;
+    /** @type {LoginPage} */
+    let loginPage;
+    /** @type {HomePage} */
+    let homePage;
+
     beforeAll(async () => {
-        base = new BasePage();
-        page = await base.openSite();
-        login = new LoginPage(page);
-        
+        basePage = new BasePage();
+        page = await basePage.openSite();
+        loginPage = new LoginPage(page);
+        homePage = new HomePage(page);
     }, MAX_SAFE_TIMEOUT)
 
     it('1st & 2nd - open the testing site', async () => {
-        expect(base.browser).not.toBe(undefined);
-        expect(base.page).not.toBe(undefined);
+        expect(basePage.browser).not.toBe(undefined);
+        expect(basePage.page).not.toBe(undefined);
     }, MAX_SAFE_TIMEOUT)
 
     it('3rd - Verify that home page is visible successfully', async () => {
         //checks if the signup/login button is visible - indicator that the page loaded successfully
-        await base.waitForSignupLogin()
-            .then(() => {
-                //loaded successfully
-                expect(true).toBe(true);
-            })
-            .catch(err => {
-                console.log('>>>ERROR - ' + err);
-                expect(false).toBe(true);
-            });
+        await homePage.verifyHomePage();
 
         //checks if url was added correctly
-        expect(await base.getCurrentURL()).toBe(base.siteURL);
+        expect(await basePage.getCurrentURL()).toBe(basePage.siteURL);
     }, MAX_SAFE_TIMEOUT)
 
     it('4th - Click on "Signup/Login" button (filling username and gmail felids)', async () => {
         //enter window login/signup
-        await base.goToSignupLogin();
+        await basePage.goToSignupLogin();
     }, MAX_SAFE_TIMEOUT)
 
     it('5th - Verify "New User Signup!" is visible', async () => {
         //wait for signup to load and checks if loaded successfully
-        await login.verifySignupHeader()
-            .then(() => {
-                expect(true).toBe(true);
-            })
-            .catch(err => {
-                console.log('>>>ERROR - ' + err);
-                expect(true).toBe(false);
-            });
+        await loginPage.verifyLoginPageSignup();
 
-        expect(await login.getSignupHeader()).toEqual(login.getExpectedSignupHeader());
+        expect(await loginPage.getSignupHeader()).toEqual(loginPage.args.signupHeader);
     }, MAX_SAFE_TIMEOUT)
 
     it('6th - Enter name and email address', async () => {
         //enter username and password for signup
-        await login.typeSignup();
-
-        //test if the text entered correctly
-        expect(await login.getSignup()).toEqual(login.getExpectedSignup());
-
-
+        await loginPage.typeSignup();
+        let signup = await loginPage.getSignup();
+        let signupKey;
+        for (let i = 0; i < Object.keys(signup).length; i++) {
+            signupKey = Object.keys(signup)[i];
+            expect(signup[signupKey]).toBe(loginPage.args[signupKey]);
+        }
     }, MAX_SAFE_TIMEOUT)
 
     it('7th - Click "Signup" button', async () => {
         //signup user you entered
-        await login.clickSignup(); //click signup button
+        await loginPage.clickSignup(); //click signup button
 
     }, MAX_SAFE_TIMEOUT)
 
     it('8th - Verify that "Email Address already exist!" is visible', async () => {
-        await login.verifyEmailExistsSignupHeader()
-            .then(() => {
-                expect(true).toBe(true);
-            })
-            .catch(err => {
-                console.log('>>>ERROR - ' + err);
-                expect(true).toBe(false);
-            });
+        await loginPage.verifyEmailExistsSignupHeader();
 
-        expect(await login.getEmailExistsSignupHeader()).toBe(login.getExpectedEmailExistsSignupHeader());
+        expect(await loginPage.getEmailExistsSignupHeader()).toBe(loginPage.args.emailExistsSignupHeader);
     }, MAX_SAFE_TIMEOUT)
 
     // await browser.close();

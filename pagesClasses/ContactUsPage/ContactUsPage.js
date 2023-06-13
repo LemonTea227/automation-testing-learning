@@ -4,11 +4,13 @@ const { selectors, args } = require('./conf.json');
 class ContactUsPage extends BasePage {
     constructor(page) {
         super();
+        /** @type {puppeteer.Page} */
         this.page = page;
+        this.args = args;
     }
 
-    async uploadFileToForm() {
-        await this.uploadFile(selectors.fileInput, args.filePath);
+    async uploadFileToForm(pathToFile = args.filePath) {
+        await this.uploadFile(selectors.fileInput, pathToFile);
     }
     async submitContactUsForm() {
         await this.submitForm(selectors.submitBtn);
@@ -16,9 +18,7 @@ class ContactUsPage extends BasePage {
     async dialogSubmitAccept() {
         await this.dialogAccept();
     }
-    async uploadFile(selector, pathToFile) {
-        await (await this.page.$(selector)).uploadFile(pathToFile);
-    }
+    
     async waitForLoad() {
         await this.page.waitForNetworkIdle();
     }
@@ -47,41 +47,46 @@ class ContactUsPage extends BasePage {
         ]);
     }
 
-    async verifyGetInTouchHeader() {
-        return await this.waitForSelectorToBeVisible(selectors.contactUsHeader);
+    async verifyContactUsPage() {
+        await this.waitForSelectorToBeVisible(selectors.contactUsHeader);
     }
 
 
-    async getGetInTouchHeader() {
+    async getContactUsHeader() {
         return await this.getTrimmedText(selectors.contactUsHeader);
     }
 
-    getExpectedGetInTouchHeader() {
-        return args.contactUsHeader;
-    }
+    // getExpectedGetInTouchHeader() {
+    //     return args.contactUsHeader;
+    // }
 
     async getContactUsFormInfo() {
-        return {
-            "name": await this.getTypedValue(selectors.fullName),
-            "email": await this.getTypedValue(selectors.email),
-            "subject": await this.getTypedValue(selectors.subject),
-            "message": await this.getTypedValue(selectors.message)
-        };
-    }
-    getExpectedContactUsFormInfo() {
-        return {
-            "name": args.fullName,
-            "email": args.email,
-            "subject": args.subject,
-            "message": args.message
-        };
-    }
+        let properties = ["fullName", "email", "subject", "message"];
+        let retObj = {};
+        let contactKey;
+        for (let i = 0; i < properties.length; i++) {
+            contactKey = properties[i];
+            retObj[contactKey] = await this.getTypedValue(selectors[contactKey]);
+        }
 
-    async typeContactUsFormInfo() {
-        await this.typeToSelector(selectors.fullName, args.fullName);
-        await this.typeToSelector(selectors.email, args.email);
-        await this.typeToSelector(selectors.subject, args.subject);
-        await this.typeToSelector(selectors.message, args.message);
+        return retObj;
+    }
+    // getExpectedContactUsFormInfo() {
+    //     return {
+    //         "name": args.fullName,
+    //         "email": args.email,
+    //         "subject": args.subject,
+    //         "message": args.message
+    //     };
+    // }
+
+    async typeContactUsFormInfo(defaultArgs = { fullName : args.fullName, email : args.email, subject : args.subject, message : args.message }) {
+        let properties = ["fullName", "email", "subject", "message"];
+        let contactKey;
+        for (let i = 0; i < properties.length; i++) {
+            contactKey = properties[i];
+            await this.typeToSelector(selectors[contactKey], defaultArgs[contactKey]);
+        }
     }
 }
 

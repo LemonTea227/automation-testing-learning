@@ -4,20 +4,22 @@ const { selectors, args } = require('./conf.json');
 class AccountCreatedPage extends BasePage {
     constructor(page) {
         super();
+        /** @type {puppeteer.Page} */
         this.page = page;
+        this.args = args;
     }
 
-    async verifyAccountCreatedHeader() {
-        return await this.waitForSelectorToBeVisible(selectors.AccountCreatedHeader);
+    async verifyAccountCreatedPage() {
+        await this.waitForSelectorToBeVisible(selectors.AccountCreatedHeader);
     }
 
     async getAccountCreatedHeader() {
         return await this.getTrimmedText(selectors.AccountCreatedHeader);
     }
 
-    getExpectedAccountCreated() {
-        return args.AccountCreatedHeader;
-    }
+    // getExpectedAccountCreated() {
+    //     return args.AccountCreatedHeader;
+    // }
 
     async clickContinue() {
         await this.clickBtn(selectors.continueBtn);

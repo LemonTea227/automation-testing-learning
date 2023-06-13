@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "fileName.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "test": "jasmine"
   },
   "author": "",
   "license": "ISC",

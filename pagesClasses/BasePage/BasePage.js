@@ -1,4 +1,3 @@
-const fs = require('fs');
 const puppeteer = require('puppeteer');
 const { selectors, args } = require('./conf.json');
 
@@ -6,7 +5,9 @@ class BasePage {
   constructor() {
     this.siteURL = 'https://automationexercise.com/';
     this.browser;
+    /** @type {puppeteer.Page} */
     this.page;
+    this.args = args;
   }
 
 
@@ -38,7 +39,7 @@ class BasePage {
 
     // go to test site and wait for it to load fully
     await this.goToSite();
-
+    
     return this.page;
   }
 
@@ -65,20 +66,15 @@ class BasePage {
     });
   }
 
-  async clickBtn(selector) {
-    await this.page.click(selector);
+  async clickBtn(selector, properties = {}) {
+    await this.page.waitForSelector(selector);
+    await this.page.click(selector, properties);
   }
 
   async waitForSelectorToBeVisible(selector) {
     await this.page.waitForSelector(selector, {
       visible: true,
-    })
-      .then(() => {
-        return true;
-      })
-      .catch(err => {
-        return err;
-      });
+    });
   }
 
   // async getSelected(selector) {
@@ -86,18 +82,22 @@ class BasePage {
   // }
 
   async getTrimmedText(selector) {
+    await this.page.waitForSelector(selector);
     return (await this.getSelectorValue(selector)).trim();
   }
 
   async getSelectorValue(selector) {
+    await this.page.waitForSelector(selector);
     return await (await (await this.page.$(selector)).getProperty('textContent')).jsonValue();
   }
 
   async getTypedValue(selector) {
+    await this.page.waitForSelector(selector);
     return await this.page.evaluate(x => x.value, (await this.page.$(selector)));
   }
 
   async typeToSelector(selector, text) {
+    await this.page.waitForSelector(selector);
     await this.page.type(selector, text);
   }
 
@@ -137,23 +137,80 @@ class BasePage {
     await this.clickBtn(selectors.deleteAccount);
   }
 
-  async waitForSignupLogin() {
-    return await this.waitForSelectorToBeVisible(selectors.signupLogin);
-  }
+  // change verifies to the pages, no need expect because of the wait for selector
+  // async verifyHomePage() {
+  //   await this.waitForSelectorToBeVisible(selectors.signupLogin);
+  // }
 
   async verifyLoggedInAs() {
-    return await this.waitForSelectorToBeVisible(selectors.loggedAs);
+    await this.waitForSelectorToBeVisible(selectors.loggedAs);
   }
-  async verifySignupLoginBtn() {
-    return await this.waitForSelectorToBeVisible(selectors.signupLogin);
-  }
+ 
 
   async getLoggedInAs() {
     return await this.getTrimmedText(selectors.loggedAs);
   }
-  getExpectedLoggedInAs() {
-    return args.loggedAs;
+  // getExpectedLoggedInAs() {
+  //   return args.loggedAs;
+  // }
+
+  async scrollToSelector(selector) {
+    await this.page.waitForSelector(selector);
+    await this.page.evaluate(x => x.scrollIntoView(), (await this.page.$(selector)));
   }
+  async scrollToSubscription() {
+    await this.scrollToSelector(selectors.SubscriptionFooter);
+  }
+
+  async isSelectorInScreen(selector) {
+    //checks if you can see the selector on the screen or if you need to scroll
+    return await this.page.evaluate((selector) => {
+      const element = document.querySelector(selector);
+      if (!element) return false;
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth
+      );
+    }, selector);
+  }
+
+  async isSubscriptionOnScreen() {
+    return await this.isSelectorInScreen(selectors.SubscriptionFooter);
+  }
+
+  async verifySubscriptionHeader () {
+    await this.waitForSelectorToBeVisible(selectors.SubscriptionHeader);
+  }
+
+  async typeEmailToSubscription(email = args.subscriptionEmail) {
+    await this.typeToSelector(selectors.subscribeEmailInput, email);
+  }
+  async getTypedEmailFromSubscription() {
+    return await this.getTypedValue(selectors.subscribeEmailInput);
+  }
+
+  async clickSubmitSubscriptionBtn() {
+    await this.clickBtn(selectors.subscribeBtn);
+  }
+  async verifySubscriptionSuccessMessage() {
+    await this.waitForSelectorToBeVisible(selectors.successSubscribeHeder);
+  }
+
+  async getSubscriptionHeader() {
+    return await this.getTrimmedText(selectors.SubscriptionHeader);
+  }
+  async getSubscriptionSuccessMessageHeader() {
+      return await this.getTrimmedText(selectors.successSubscribeHeder);
+  }
+
+  async uploadFile(selector, pathToFile) {
+    await (await this.page.$(selector)).uploadFile(pathToFile);
+}
+
+
 };
 
 module.exports = BasePage; // 👈 Export class

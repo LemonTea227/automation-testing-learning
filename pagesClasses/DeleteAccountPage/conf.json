@@ -1,5 +1,5 @@
 {
-    "selector" : {
+    "selectors" : {
         "AccountDeletedHeader": "[data-qa='account-deleted']",
         "continueBtn": "[data-qa='continue-button']"
     },

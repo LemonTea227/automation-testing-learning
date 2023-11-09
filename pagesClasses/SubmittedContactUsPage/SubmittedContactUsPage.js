@@ -1,19 +1,29 @@
-const BasePage = require("../BasePage/BasePage");
+const BasePage = require("../BasePage/BasePage.js");
+const {selectors, args} = require('./conf.json');
 
 class SubmittedContactUsPage extends BasePage{
-    constructor(){
-        this.conf = JSON.parse(fs.readFileSync('SubmittedContactUsPage/conf.json'));
+    constructor(page){
+        super();
+        /** @type {puppeteer.Page} */
+        this.page = page;
+        this.args = args;
     }
 
-    async getGetInTouchHeader() {
-        return await this.getTrimmedText(this.conf.selector.contactUsHeader);
+    async verifySubmittedContactUsPage() {
+        await this.waitForSelectorToBeVisible(selectors.successHeader);
     }
 
-    getExpectedGetInTouchHeader() {
-        return this.conf.args.contactUsHeader;
+    async getSuccessHeader() {
+        return await this.getTrimmedText(selectors.successHeader);
     }
+
+    // getExpectedSuccessHeader() {
+    //     return args.successHeader;
+    // }
 
     async clickHome() {
-        await this.clickBtn(this.conf.selector.homeFormBtn);
+        await this.clickBtn(selectors.homeFormBtn);
     }
 }
+
+module.exports = SubmittedContactUsPage;

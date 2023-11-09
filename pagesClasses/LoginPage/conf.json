@@ -1,19 +1,26 @@
 {
-    "selector" : {
+    "selectors": {
         "usernameSignup": "[data-qa='signup-name']",
-        "emailSignup":"[data-qa='signup-email']",
+        "emailSignup": "[data-qa='signup-email']",
         "signupBtn": "[data-qa='signup-button']",
         "signupHeader": ".signup-form h2",
         "emailLogin": "[data-qa='login-email']",
         "passwordLogin": "[data-qa='login-password']",
         "loginBtn": "[data-qa='login-button']",
-        "loginHeader": ".signup-form h2"
+        "loginHeader": ".login-form h2",
+        "incorrectLoginHeader": ".login-form p",
+        "emailExistsSignupHeader":"form [style='color: red;']"
     },
-    "args" : {
+    "args": {
         "username": "testTavor",
-        "email":"testTavor@gmail.com",
-        "password":"testTavor123$",
+        "email": "testTavor@gmail.com",
+        "password": "testTavor123$",
+        "emailIncorrect":"testTavorIncoorect@gmail.com",
+        "passwordIncorrect":"incorrectPasswordTavor321&",
         "signupHeader": "New User Signup!",
-        "loginHeader": "Login to your account"
+        "loginHeader": "Login to your account",
+        "incorrectLoginHeader": "Your email or password is incorrect!",
+        "loginURL": "https://automationexercise.com/login",
+        "emailExistsSignupHeader":"Email Address already exist!"
     }
 }

@@ -1,0 +1,31 @@
+{
+    "selectors": {
+        "reviewYourOrderHeader": ".step-one:nth-of-type(4) .heading",
+        "addressDetails": ".address",
+        "details": {
+            "titleFullName": ".address_firstname.address_lastname",
+            "company": ".address_address1.address_address2:nth-of-type(3)",
+            "address": ".address_address1.address_address2:nth-of-type(4)",
+            "address2": ".address_address1.address_address2:nth-of-type(5)",
+            "cityStateZipcode": ".address_city.address_state_name.address_postcode",
+            "country": ".address_country_name",
+            "phone": ".address_phone"
+        },
+        "description": "[name = 'message']",
+        "placeOrder": "[href='/payment']"
+    },
+    "args": {
+        "reviewYourOrderHeader": "Review Your Order",
+        "details": {
+            "titleFullName": "Mr. Tavor Naydits",
+            "company": "Testing.inc",
+            "address": "here st.",
+            "address2": "there st.",
+            "cityStateZipcode": "wow irl 6969696",
+            "country": "Israel",
+            "phone": "0543116969"
+        },
+        "description": "MY ORDER IS YOUR COMMAND!!!",
+        "checkoutURL": "https://automationexercise.com/checkout"
+    }
+}

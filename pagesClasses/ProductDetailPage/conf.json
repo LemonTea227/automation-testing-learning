@@ -1,0 +1,23 @@
+{
+    "selectors": {
+        "productNameHeader": ".product-information h2",
+        "productCategoryHeader": ".product-information p:nth-of-type(1)",
+        "productPriceHeader": ".product-information span span",
+        "productAvailabilityHeader": ".product-information p:nth-of-type(2)",
+        "productConditionHeader": ".product-information p:nth-of-type(3)",
+        "productBrandHeader": ".product-information p:nth-of-type(4)",
+        "productQuantityInput": "#quantity",
+        "addToCart": ".btn.btn-default.cart",
+        "viewCart": "p [href='/view_cart']"
+    },
+    "args": {
+        "productNameHeader": "Blue Top",
+        "productCategoryHeader": "Category: Women > Tops",
+        "productPriceHeader": "Rs. 500",
+        "productAvailabilityHeader": "Availability: In Stock",
+        "productConditionHeader": "Condition: New", 
+        "productBrandHeader": "Brand: Polo",
+        "quantityOfProduct": 4,
+        "firstProductDetailURL": "https://automationexercise.com/product_details/1"
+    }
+}

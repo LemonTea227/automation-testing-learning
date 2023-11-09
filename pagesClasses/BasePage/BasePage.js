@@ -1,12 +1,13 @@
-const fs = require('fs');
 const puppeteer = require('puppeteer');
+const { selectors, args } = require('./conf.json');
 
 class BasePage {
   constructor() {
     this.siteURL = 'https://automationexercise.com/';
-    this.conf = JSON.parse(fs.readFileSync('BasePage/conf.json'));
     this.browser;
+    /** @type {puppeteer.Page} */
     this.page;
+    this.args = args;
   }
 
 
@@ -38,6 +39,8 @@ class BasePage {
 
     // go to test site and wait for it to load fully
     await this.goToSite();
+    
+    return this.page;
   }
 
   async getCurrentURL() {
@@ -63,76 +66,151 @@ class BasePage {
     });
   }
 
-  async clickBtn(selector) {
-    await this.page.click(selector);
+  async clickBtn(selector, properties = {}) {
+    await this.page.waitForSelector(selector);
+    await this.page.click(selector, properties);
   }
 
   async waitForSelectorToBeVisible(selector) {
     await this.page.waitForSelector(selector, {
       visible: true,
-    })
-      .then(() => {
-        return true;
-      })
-      .catch(err => {
-        return err;
-      });
+    });
   }
 
-  async getCheckedStatus(selector) {
-    await (await (await page.$(selector)).getProperty('checked')).jsonValue()
-  }
-
-  async selectOption(selector, valueToSelect){
-    await page.select(selector,valueToSelect);
-  }
-
-  async getSelected(selector) {
-    return await await page.evaluate(x => x.value, (await page.$(selector)));
-  }
+  // async getSelected(selector) {
+  //   return await await this.page.evaluate(x => x.value, (await page.$(selector)));
+  // }
 
   async getTrimmedText(selector) {
-    return await this.getSelectorValue(selector).trim();
+    await this.page.waitForSelector(selector);
+    return (await this.getSelectorValue(selector)).trim();
   }
 
   async getSelectorValue(selector) {
+    await this.page.waitForSelector(selector);
     return await (await (await this.page.$(selector)).getProperty('textContent')).jsonValue();
   }
 
   async getTypedValue(selector) {
-    return await this.page.evaluate(x => x.value, (await page.$(selector)));
+    await this.page.waitForSelector(selector);
+    return await this.page.evaluate(x => x.value, (await this.page.$(selector)));
   }
 
   async typeToSelector(selector, text) {
+    await this.page.waitForSelector(selector);
     await this.page.type(selector, text);
+  }
+
+
+
+  async homePageFromBtn() {
+    await this.clickBtn(selectors.homeBtn);
+  }
+  async homePageFromLogo() {
+    await this.clickBtn(selectors.homeLogo);
+  }
+  async goToProducts() {
+    await this.clickBtn(selectors.products);
+  }
+  async goToCart() {
+    await this.clickBtn(selectors.cart);
+  }
+  async goToSignupLogin() {
+    await this.clickBtn(selectors.signupLogin);
+  }
+  async goToTestCases() {
+    await this.clickBtn(selectors.testCases);
+  }
+  async goToAPITesting() {
+    await this.clickBtn(selectors.APITesting);
+  }
+  async goToVideoTutorials() {
+    await this.clickBtn(selectors.videoTutorials);
+  }
+  async goToContactUs() {
+    await this.clickBtn(selectors.contactUs);
+  }
+  async goToLogout() {
+    await this.clickBtn(selectors.logout);
+  }
+  async goToDeleteAccount() {
+    await this.clickBtn(selectors.deleteAccount);
+  }
+
+  // change verifies to the pages, no need expect because of the wait for selector
+  // async verifyHomePage() {
+  //   await this.waitForSelectorToBeVisible(selectors.signupLogin);
+  // }
+
+  async verifyLoggedInAs() {
+    await this.waitForSelectorToBeVisible(selectors.loggedAs);
+  }
+ 
+
+  async getLoggedInAs() {
+    return await this.getTrimmedText(selectors.loggedAs);
+  }
+  // getExpectedLoggedInAs() {
+  //   return args.loggedAs;
+  // }
+
+  async scrollToSelector(selector) {
+    await this.page.waitForSelector(selector);
+    await this.page.evaluate(x => x.scrollIntoView(), (await this.page.$(selector)));
+  }
+  async scrollToSubscription() {
+    await this.scrollToSelector(selectors.SubscriptionFooter);
+  }
+
+  async isSelectorInScreen(selector) {
+    //checks if you can see the selector on the screen or if you need to scroll
+    return await this.page.evaluate((selector) => {
+      const element = document.querySelector(selector);
+      if (!element) return false;
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth
+      );
+    }, selector);
+  }
+
+  async isSubscriptionOnScreen() {
+    return await this.isSelectorInScreen(selectors.SubscriptionFooter);
+  }
+
+  async verifySubscriptionHeader () {
+    await this.waitForSelectorToBeVisible(selectors.SubscriptionHeader);
+  }
+
+  async typeEmailToSubscription(email = args.subscriptionEmail) {
+    await this.typeToSelector(selectors.subscribeEmailInput, email);
+  }
+  async getTypedEmailFromSubscription() {
+    return await this.getTypedValue(selectors.subscribeEmailInput);
+  }
+
+  async clickSubmitSubscriptionBtn() {
+    await this.clickBtn(selectors.subscribeBtn);
+  }
+  async verifySubscriptionSuccessMessage() {
+    await this.waitForSelectorToBeVisible(selectors.successSubscribeHeder);
+  }
+
+  async getSubscriptionHeader() {
+    return await this.getTrimmedText(selectors.SubscriptionHeader);
+  }
+  async getSubscriptionSuccessMessageHeader() {
+      return await this.getTrimmedText(selectors.successSubscribeHeder);
   }
 
   async uploadFile(selector, pathToFile) {
     await (await this.page.$(selector)).uploadFile(pathToFile);
-  }
+}
 
-  async dialogAccept() {
-    this.page.on('dialog', async dialog => {
-      await dialog.accept();
-    })
-  }
 
-  async submitForm(selector) {
-    await Promise.all([
-      page.$eval('input[type=submit]', element =>
-        element.click()
-      ),
-      await page.waitForNetworkIdle(), // check moving line to dialogAccept
-    ]);
-  }
-
-  async BasePageFromBtn() {
-    await this.clickBtn(this.conf.selector.homeBtn);
-  }
-
-  async BasePageFromLogo() {
-    await this.clickBtn(this.conf.selector.homeLogo);
-  }
 };
 
 module.exports = BasePage; // 👈 Export class

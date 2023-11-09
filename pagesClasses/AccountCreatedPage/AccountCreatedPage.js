@@ -1,20 +1,30 @@
-const BasePage = require("../BasePage/BasePage");
+const BasePage = require("../BasePage/BasePage.js");
+const { selectors, args } = require('./conf.json');
 
-class AccountCreatedPage extends BasePage{
-    constructor(){
-        this.conf = JSON.parse(fs.readFileSync('AccountCreatedPage/conf.json'));
+class AccountCreatedPage extends BasePage {
+    constructor(page) {
+        super();
+        /** @type {puppeteer.Page} */
+        this.page = page;
+        this.args = args;
+    }
+
+    async verifyAccountCreatedPage() {
+        await this.waitForSelectorToBeVisible(selectors.accountCreatedHeader);
     }
 
     async getAccountCreatedHeader() {
-        return await this.getTrimmedTextFromSelector(this.conf.selector.AccountCreatedHeader);
+        return await this.getTrimmedText(selectors.accountCreatedHeader);
     }
 
-    getExpectedAccountCreated() {
-        return this.conf.AccountCreatedHeader;
-    }
+    // getExpectedAccountCreated() {
+    //     return args.accountCreatedHeader;
+    // }
 
     async clickContinue() {
-        await this.clickBtn(this.conf.selector.continueBtn);
+        await this.clickBtn(selectors.continueBtn);
     }
 
-} 
+}
+
+module.exports = AccountCreatedPage;

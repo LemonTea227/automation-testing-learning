@@ -1,19 +1,29 @@
-const BasePage = require("../BasePage/BasePage");
+const BasePage = require("../BasePage/BasePage.js");
+const {selectors, args} = require('./conf.json');
 
 class DeleteAccountPage extends BasePage {
-    constructor(){
-        this.conf = JSON.parse(fs.readFileSync('DeleteAccountPage/conf.json'));
+    constructor(page){
+        super();
+        /** @type {puppeteer.Page} */
+        this.page = page;
+        this.args = args;
+    }
+
+    async verifyDeleteAccountPage() {
+        await this.waitForSelectorToBeVisible(selectors.AccountDeletedHeader);
     }
     
     async getAccountDeletedHeader() {
-        return await this.getTrimmedTextFromSelector(this.conf.selector.AccountDeletedHeader);
+        return await this.getTrimmedText(selectors.AccountDeletedHeader);
     }
 
-    getExpectedAccountDeleted() {
-        return this.conf.args.AccountDeletedHeader;
-    }
+    // getExpectedAccountDeleted() {
+    //     return args.AccountDeletedHeader;
+    // }
 
     async clickContinue() {
-        await this.clickBtn(this.conf.selector.continueBtn);
+        await this.clickBtn(selectors.continueBtn);
     }
 }
+
+module.exports = DeleteAccountPage;

@@ -1,0 +1,19 @@
+{
+    "selectors": {
+        "ShoppingCartHeader": ".breadcrumb .active",
+        "products": "#cart_info tbody tr[id*='product-']",
+        "pricesOfProduct": ".cart_price p",
+        "quantitiesOfProduct": ".cart_quantity button",
+        "totalPricesOfProduct": ".cart_total p",
+        "deleteButtons": ".cart_quantity_delete",
+        "proceedToCheckout": ".btn.btn-default.check_out",
+        "registerLoginBtn" : "p [href='/login']"
+    },
+    "args": {
+        "firstPrice": "Rs. 500",
+        "secondPrice": "Rs. 400",
+        "expectedQuantity": "1",      
+        "ShoppingCartHeader": "Shopping Cart",
+        "cartURL": "https://automationexercise.com/view_cart"
+    }
+}

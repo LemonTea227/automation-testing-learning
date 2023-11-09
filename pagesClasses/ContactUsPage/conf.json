@@ -1,5 +1,5 @@
 {
-    "selector": {
+    "selectors": {
         "contactUsHeader": ".contact-form h2",
         "fullName": "[data-qa='name']",
         "email": "[data-qa='email']",

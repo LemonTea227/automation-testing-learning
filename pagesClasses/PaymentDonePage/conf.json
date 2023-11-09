@@ -1,0 +1,8 @@
+{
+    "selectors": {
+        "paymentDoneHeader": ".col-sm-9 p"
+    },  
+    "args": {
+        "paymentDoneHeader": "Congratulations! Your order has been confirmed!"
+    }
+}

@@ -1,6 +1,6 @@
 const BasePage = require("../BasePage/BasePage");
 const { selectors, args } = require('./conf.json');
-const {getElementText, getLstOfSelector, getAttributeLst} = require('../../usable/useCase.js');
+const { getElementText, getLstOfSelector, getAttributeLst } = require('../../usable/useCase.js');
 
 class CartPage extends BasePage {
     constructor(page) {
@@ -80,8 +80,27 @@ class CartPage extends BasePage {
         const products = await this.getProductLst();
         return await this.getTotalPriceOfElement(Object.values(products)[Object.values(await this.getIDsLst()).indexOf(id.toString())]);
     }
+    async deleteProductByID(id) {
+        const deleteProducts = await getLstOfSelector(this.page, selectors.deleteButtons);
+        const ids = await this.getIDsLst();
+        deleteProducts[ids.indexOf(id.toString())].click();
+        await this.page.waitForFunction((initialCount, selectors) => {
+            // Get the current count of elements in the list
+            const currentCount = document.querySelectorAll(selectors.products).length;
+          
+            // Check if the count has decreased (element removed)
+            return currentCount < initialCount;
+          }, {}, ids.length, selectors);
+    }
     async getIDsLst() {
-        return await getAttributeLst(this.page, selectors.deleteButtons, 'data-product-id'); //only delete buttons have the ids of the products
+        let productLst = await getAttributeLst(this.page, selectors.products, 'id');
+        let idLst = [];
+        for (let i = 0; i < productLst.length; i++) {
+            if (productLst[i]) {
+                idLst.push(productLst[i].split('-')[1]);
+            }
+        }
+        return idLst;
     }
     async getPriceOfElement(element) {
         return await getElementText(this.page, element, selectors.pricesOfProduct);
@@ -92,6 +111,19 @@ class CartPage extends BasePage {
     async getTotalPriceOfElement(element) {
         return await getElementText(this.page, element, selectors.totalPricesOfProduct);
     }
+
+    async goToCheckout() {
+        await this.clickBtn(selectors.proceedToCheckout);
+    }
+
+    async goToRegisterLogin() {
+        await this.waitForSelectorToBeVisible(selectors.registerLoginBtn);
+        await this.clickBtn(selectors.registerLoginBtn);
+    }
+
+
+
+
 }
 
 module.exports = CartPage;

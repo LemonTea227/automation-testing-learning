@@ -10,15 +10,15 @@ class AccountCreatedPage extends BasePage {
     }
 
     async verifyAccountCreatedPage() {
-        await this.waitForSelectorToBeVisible(selectors.AccountCreatedHeader);
+        await this.waitForSelectorToBeVisible(selectors.accountCreatedHeader);
     }
 
     async getAccountCreatedHeader() {
-        return await this.getTrimmedText(selectors.AccountCreatedHeader);
+        return await this.getTrimmedText(selectors.accountCreatedHeader);
     }
 
     // getExpectedAccountCreated() {
-    //     return args.AccountCreatedHeader;
+    //     return args.accountCreatedHeader;
     // }
 
     async clickContinue() {

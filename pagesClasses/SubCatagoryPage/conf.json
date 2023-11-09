@@ -1,0 +1,8 @@
+{
+    "selectors": {
+        "subCategoryPageHeader": ".features_items h2"
+    }, 
+    "args": {
+        "subCategoryPageURL": "https://automationexercise.com/category_products/" 
+    }
+}

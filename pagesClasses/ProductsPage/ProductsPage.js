@@ -1,10 +1,11 @@
 const BasePage = require("../BasePage/BasePage");
 const { selectors, args } = require('./conf.json');
-const {getLstOfSelector} = require('../../usable/useCase.js');
+const { getLstOfSelector, getElementText } = require('../../usable/useCase.js');
 
 class ProductsPage extends BasePage {
     constructor(page) {
         super();
+        /** @type {Puppeteer.Page} */
         this.page = page;
         this.args = args;
     }
@@ -63,7 +64,7 @@ class ProductsPage extends BasePage {
         const products = await this.getProductsLst();
         await products[index].hover();
         await products[index].$eval(selectors.addProductsToCarts, (element) => element.click());
-    } 
+    }
 
     // async hoverAndClickFirstAddToCart() {
     //     await this.hoverAndClick(selectors.firstItemAddToCart);
@@ -79,6 +80,32 @@ class ProductsPage extends BasePage {
     async clickViewCart() {
         await this.waitForSelectorToBeVisible(selectors.viewCartBtn);
         await this.clickBtn(selectors.viewCartBtn);
+    }
+
+    async verifyCatagories() {
+        await this.waitForSelectorToBeVisible(selectors.categoryHeader);
+        await this.waitForSelectorToBeVisible(selectors.categories);
+    }
+
+    async getCategoryLst() {
+        return await getLstOfSelector(this.page, selectors.categories);
+    }
+
+    async clickCategory(category = "Women") {
+        const categoryLst = await this.getCategoryLst();
+        await categoryLst[args.catagoriesNames.indexOf(category)].click();
+        return category.toLowerCase();
+    }
+    async getOpenCategoryName() {
+        await this.page.waitForSelector(selectors.openCategory);
+        return await this.page.$eval(selectors.openCategory, element => element.getAttribute('id'));
+    }
+    async clickSubCategory(subCategory = "Tops") {
+        // await this.page.waitForFunction(() => {
+        //     return this.getOpenCategoryName();
+        // })
+        await this.clickBtn("[href='/category_products/" + args[((await this.getOpenCategoryName()).toString()).toLowerCase()][subCategory.toLowerCase()] + "']");
+        return subCategory.toLowerCase();
     }
 
 }

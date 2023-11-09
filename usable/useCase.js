@@ -1,8 +1,8 @@
 async function getElementText(page, element, selectorInElement = '') {
     if (selectorInElement === '') {
-        return await page.evaluate((el) => el.value, elementHandle);
+        return await page.evaluate((el) => el.value, element);
     }
-    return await element.$eval(selectorInElement, (el) => el.textContent);
+    return (await element.$eval(selectorInElement, (el) => el.textContent)).trim();
 }
 
 async function getLstOfSelector(page, selector) {

@@ -6,7 +6,7 @@ const HomePage = require('../pagesClasses/HomePage/HomePage');
 
 const MAX_SAFE_TIMEOUT = Math.pow(2, 31) - 1;
 
-describe('TC12 - Add Products in Cart', () => {
+describe('TC17 - Remove Products From Cart', () => {
     /** @type {BasePage} */
     let basePage;
     /** @type {puppeteer.Page} */
@@ -39,41 +39,48 @@ describe('TC12 - Add Products in Cart', () => {
         expect(await basePage.getCurrentURL()).toBe(basePage.siteURL);
     }, MAX_SAFE_TIMEOUT)
 
-    it('4th - Click on "Product" button', async () => {
-        await basePage.goToProducts();
-        await productsPage.verifyProductsPage();
-
-        expect(await basePage.getCurrentURL()).toBe(productsPage.args.productsURL);
-    }, MAX_SAFE_TIMEOUT)
-
-    it('5th - Hover over first product and click "Add to cart"', async () => {
+    it('4th - Hover over first product and click "Add to cart"', async () => {
         await productsPage.hoverAndClickAddToCartByIndex(0);
-    }, MAX_SAFE_TIMEOUT)
-
-    it('6th - Click "Continue Shopping" button', async () => {
+        await productsPage.clickContinueShopping();
+        await productsPage.hoverAndClickAddToCartByIndex(1);
         await productsPage.clickContinueShopping();
     }, MAX_SAFE_TIMEOUT)
 
-    it('7th - Hover over second product and click "Add to cart"', async () => {
-        await productsPage.hoverAndClickAddToCartByIndex(1);
+    it('5th - Click "Cart" button', async () => {
+        await basePage.goToCart();
     }, MAX_SAFE_TIMEOUT)
 
-    it('8th - Click "View Cart" button', async () => {
-        await productsPage.clickViewCart();
-    }, MAX_SAFE_TIMEOUT)
+    it('6th - Verify that cart page is displayed', async () => {
+        expect(await basePage.getCurrentURL()).toBe(cartPage.args.cartURL);
 
-    it('9th - Verify both products are added to Cart', async () => {
         const cart = await cartPage.getProductLst();
         expect(Object.values(cart).length).toBeGreaterThanOrEqual(2);
-    }, MAX_SAFE_TIMEOUT)
 
-    it('10th - Verify their prices, quantity and total price', async () => {
         let properties = ["firstPrice", "secondPrice"];
         let cartItemsDetailsObj = await cartPage.getCartDetails();
         for (let i = 1; i <= properties.length; i++) {
             expect(cartItemsDetailsObj[i.toString()].price).toBe(cartPage.args[properties[i - 1]]);
             expect(cartItemsDetailsObj[i.toString()].quantity).toBe(cartPage.args.expectedQuantity);
             expect(cartItemsDetailsObj[i.toString()].totalPrice).toBe(cartItemsDetailsObj[i.toString()].price);
+        }
+    }, MAX_SAFE_TIMEOUT)
+
+    it('7th - Click "X" button corresponding to particular product', async () => {
+        await cartPage.deleteProductByID(1);
+    }, MAX_SAFE_TIMEOUT)
+
+    it('8th - Verify that product is removed from the cart', async () => {
+        let properties = ["firstPrice", "secondPrice"];
+        let cartItemsDetailsObj = await cartPage.getCartDetails();
+        for (let i = 1; i <= properties.length; i++) {
+            if (i == 1) {
+                expect(Object.keys(cartItemsDetailsObj)).not.toContain(i.toString());
+            }
+            else {
+                expect(cartItemsDetailsObj[i.toString()].price).toBe(cartPage.args[properties[i - 1]]);
+                expect(cartItemsDetailsObj[i.toString()].quantity).toBe(cartPage.args.expectedQuantity);
+                expect(cartItemsDetailsObj[i.toString()].totalPrice).toBe(cartItemsDetailsObj[i.toString()].price);
+            }
         }
     }, MAX_SAFE_TIMEOUT)
 })

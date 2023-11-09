@@ -13,12 +13,29 @@
         "viewCartBtn":"p [href='/view_cart']",
         "products": ".product-image-wrapper",
         "viewProducts": ".choose a",
-        "addProductsToCarts": ".overlay-content a"
+        "addProductsToCarts": ".overlay-content a",
+        "categoryHeader":".left-sidebar h2",
+        "categories": "[data-toggle='collapse']",
+        "openCategory": "[style='height: auto;']"
     },
     "args": {
+        "women": {
+            "dress" : "1",
+            "tops": "2",
+            "saree": "7"
+        },
+        "men": {
+            "tshirts": "3",
+            "jeans": "6"
+        },
+        "kids": {
+            "dress": "4",
+            "tops & shirts": "5"
+        },
         "allProductsHeader": "ALL PRODUCTS",
         "productToSearch": "Blue Top",
         "searchedProductsHeader": "SEARCHED PRODUCTS",
+        "catagoriesNames": ["Women", "Men", "Kids"],
         "productsURL": "https://automationexercise.com/products"
     }
 }

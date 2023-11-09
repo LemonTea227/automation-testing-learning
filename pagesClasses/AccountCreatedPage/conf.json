@@ -1,9 +1,9 @@
 {
     "selectors" : {
-        "AccountCreatedHeader": "[data-qa='account-created']",
+        "accountCreatedHeader": "[data-qa='account-created']",
         "continueBtn": "[data-qa='continue-button']"
     },
     "args" : {
-        "AccountCreatedHeader": "Account Created!"
+        "accountCreatedHeader": "Account Created!"
     }
 }

@@ -1,20 +1,13 @@
 {
     "selectors": {
         "ShoppingCartHeader": ".breadcrumb .active",
-        "products": "#cart_info_table tbody tr",
+        "products": "#cart_info tbody tr[id*='product-']",
         "pricesOfProduct": ".cart_price p",
         "quantitiesOfProduct": ".cart_quantity button",
         "totalPricesOfProduct": ".cart_total p",
         "deleteButtons": ".cart_quantity_delete",
-
-        "firstProductID": "#product-1",
-        "firstPrice":"#product-1 .cart_price p",
-        "firstQuantity":"#product-1 .cart_quantity button",
-        "firstTotalPrice":"#product-1 .cart_total p",
-        "secondProductID": "#product-2",
-        "secondPrice":"#product-2 .cart_price p",
-        "secondQuantity":"#product-2 .cart_quantity button",
-        "secondTotalPrice":"#product-2 .cart_total p"
+        "proceedToCheckout": ".btn.btn-default.check_out",
+        "registerLoginBtn" : "p [href='/login']"
     },
     "args": {
         "firstPrice": "Rs. 500",

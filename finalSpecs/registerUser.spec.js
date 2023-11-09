@@ -78,7 +78,7 @@ describe('TC1 - Register User', () => {
     }, MAX_SAFE_TIMEOUT)
 
     it('8th - Verify that "ENTER ACCOUNT INFORMATION" is visible', async () => {
-        await signupPage.verifySignupPage()
+        await signupPage.verifySignupPage();
 
         expect(await signupPage.getSignupHeader()).toBe(signupPage.args.signupHeader);
     }, MAX_SAFE_TIMEOUT)
@@ -119,7 +119,7 @@ describe('TC1 - Register User', () => {
 
     it('13th - Click "Create Account" button', async () => {
         //signup user you entered
-        await signupPage.clickCreateAccount()//click create account button
+        await signupPage.clickCreateAccount();//click create account button
 
     }, MAX_SAFE_TIMEOUT)
 
@@ -127,7 +127,7 @@ describe('TC1 - Register User', () => {
         await accountCreatedPage.verifyAccountCreatedPage();
 
         //check if the text of 'ENTER ACCOUNT INFORMATION' is correct
-        expect(await accountCreatedPage.getAccountCreatedHeader()).toEqual(accountCreatedPage.args.AccountCreatedHeader);
+        expect(await accountCreatedPage.getAccountCreatedHeader()).toEqual(accountCreatedPage.args.accountCreatedHeader);
 
     }, MAX_SAFE_TIMEOUT)
 

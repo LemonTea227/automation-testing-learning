@@ -1,0 +1,22 @@
+{
+    "selectors": {
+        "paymentHeader": ".heading",
+        "nameCard": "[data-qa='name-on-card']",
+        "cardNumber": ".form-control.card-number",
+        "cvc": "[data-qa='cvc']",
+        "expirationMonth": "[data-qa='expiry-month']",
+        "expirationYear": "[data-qa='expiry-year']",
+        "payBtn": "[data-qa='pay-button']", 
+        "successMessageHeader": "#success_message .alert-success.alert"
+    },
+    "args": {
+        "nameCard": "9",
+        "cardNumber": "8",
+        "cvc": "7",
+        "expirationMonth": "6",
+        "expirationYear": "5",
+        "successMessageHeader" : "Your order has been placed successfully!",
+        "paymentURL": "https://automationexercise.com/payment",
+        "paymentHeader":"Payment"
+    }
+}

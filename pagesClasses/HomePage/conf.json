@@ -5,9 +5,9 @@
         "products": ".product-image-wrapper",
         "viewProducts": ".choose a",
         "addProductsToCarts": ".overlay-content a"
-
+        
     }, 
     "args": {
-
+        
     }
 }
